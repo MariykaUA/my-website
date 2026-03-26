@@ -5,9 +5,12 @@
         <div class="intro__text reveal">
           <p class="intro__eyebrow">A bit about me</p>
           <h2 class="intro__title">I turn complex problems into elegant digital solutions</h2>
-          <p>With a background spanning UX research, visual design, and frontend development, I work at the intersection of form and function. I believe the best products are ones that feel effortless — where design and engineering work in harmony.</p>
+<p>With a background spanning UX research, visual design, and frontend development, I work at the intersection of form and function. I believe the best products are ones that feel effortless — where design and engineering work in harmony.</p>
           <p>When I'm not designing or coding, you'll find me somewhere with a map, a camera, and an unrealistic optimism about how much I can see in one day.</p>
           <BaseButton to="/about" variant="secondary">My full story →</BaseButton>
+        </div>
+        <div class="intro__visual reveal" style="transition-delay: 0.1s">
+          <img class="intro__gif" :src="catGif" alt="Cat animation" />
         </div>
         <div class="intro__stats reveal" style="transition-delay: 0.15s">
           <div v-for="stat in stats" :key="stat.label" class="intro__stat">
@@ -23,6 +26,7 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
+import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 
@@ -42,9 +46,24 @@ const stats = [
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-12;
-    align-items: center;
+    align-items: start;
 
     @include respond-to(lg) { grid-template-columns: 1fr 1fr; }
+  }
+
+  &__visual {
+    display: flex;
+    justify-content: center;
+
+    @include respond-to(lg) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__gif {
+    width: 60px;
+    border: none;
+    box-shadow: none;
   }
 
   &__eyebrow {

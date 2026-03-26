@@ -14,6 +14,7 @@
         </p>
         <div class="hero__actions animate-fade-in-up" style="animation-delay: 0.3s">
           <BaseButton to="/about" size="lg">Contact me</BaseButton>
+          <img class="hero__cat" :src="catGif" alt="" />
         </div>
       </div>
 
@@ -31,6 +32,7 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
 import myPhoto from '@/assets/images/my-photo.jpg'
+import catGif from '@/assets/images/Cat animation.gif'
 
 </script>
 
@@ -82,7 +84,14 @@ import myPhoto from '@/assets/images/my-photo.jpg'
   &__actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: $space-4;
+  }
+
+  &__cat {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
   }
 
   &__visual {

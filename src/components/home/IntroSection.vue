@@ -4,13 +4,10 @@
       <div class="intro__grid">
         <div class="intro__text reveal">
           <p class="intro__eyebrow">A bit about me</p>
-          <h2 class="intro__title">I turn complex problems into elegant digital solutions</h2>
-<p>With a background spanning UX research, visual design, and frontend development, I work at the intersection of form and function. I believe the best products are ones that feel effortless — where design and engineering work in harmony.</p>
-          <p>When I'm not designing or coding, you'll find me somewhere with a map, a camera, and an unrealistic optimism about how much I can see in one day.</p>
+          <h2 class="intro__title">Turning ideas into interactive experiences.</h2>
+<p>With the passion for UX/UI design, I really love bringing creative ideas to life with code. Alongside my design skills, I have hands-on experience as a Software Engineer Intern at On AG, especially in Vue.js, SCSS, and Typescript. I'm continuously learning and exploring new ways to enhance user experiences through thoughtful design and development.</p>
+          <p>When I'm not designing or coding, you'll find me somewhere with a map, exploring new places, running, or just enjoying the nature.</p>
           <BaseButton to="/about" variant="secondary">My full story →</BaseButton>
-        </div>
-        <div class="intro__visual reveal" style="transition-delay: 0.1s">
-          <img class="intro__gif" :src="catGif" alt="Cat animation" />
         </div>
         <div class="intro__stats reveal" style="transition-delay: 0.15s">
           <div v-for="stat in stats" :key="stat.label" class="intro__stat">
@@ -26,7 +23,6 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 
@@ -58,12 +54,6 @@ const stats = [
     @include respond-to(lg) {
       grid-column: 1 / -1;
     }
-  }
-
-  &__gif {
-    width: 60px;
-    border: none;
-    box-shadow: none;
   }
 
   &__eyebrow {

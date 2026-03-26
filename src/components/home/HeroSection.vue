@@ -8,9 +8,7 @@
           <span class="text-gradient">experiences</span><br>
           that matter
         </h1>
-        <p class="hero__subtitle animate-fade-in-up" style="animation-delay: 0.2s">
-          I design and build thoughtful interfaces that are beautiful, accessible, and a joy to use.
-          Currently available for freelance projects.
+        <p class="hero__subtitle animate-fade-in-up" style="animation-delay: 0.2s">Dreamer, creator, and curious human passionate about building user-friendly websites.
         </p>
         <div class="hero__actions animate-fade-in-up" style="animation-delay: 0.3s">
           <BaseButton to="/about" size="lg">Contact me</BaseButton>
@@ -77,8 +75,8 @@ import catGif from '@/assets/images/Cat animation.gif'
   &__subtitle {
     font-size: $font-size-lg;
     color: $color-text-muted;
-    max-width: 520px;
-    margin-bottom: $space-8;
+    width: 450px;
+    margin-bottom: 12px;
   }
 
   &__actions {
@@ -86,6 +84,7 @@ import catGif from '@/assets/images/Cat animation.gif'
     flex-wrap: wrap;
     align-items: center;
     gap: $space-4;
+    margin-top: $space-6;
   }
 
   &__cat {

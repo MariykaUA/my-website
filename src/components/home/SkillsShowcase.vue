@@ -2,8 +2,8 @@
   <section class="beyond section">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Beyond the screen</h2>
-        <p class="section-subtitle">A few things that keep me inspired outside of work</p>
+        <h2 class="section-title">Beyond the screen <img :src="catGif" class="section-cat" alt="" /></h2>
+        <p class="section-subtitle">Being inspired outside of work</p>
       </div>
 
       <div class="beyond__grid">
@@ -19,29 +19,30 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
+import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 
 const items = [
-  {
+  
+{
+    emoji: '📸',
+    title: 'Orieneering & Running',
+    description: 'Running is my go-to for clearing my head, and orienteering adds a fun twist with maps and checkpoints.',
+  },{
     emoji: '✈️',
     title: 'Travelling',
     description: 'Exploring new countries, getting lost in new cities, and collecting passport stamps.',
   },
   {
-    emoji: '📸',
-    title: 'Photography',
-    description: 'Capturing moments and places through a lens — mostly travel and street photography.',
-  },
-  {
     emoji: '🇩🇪',
-    title: 'Learning German',
-    description: 'Currently at B1 and slowly getting there — one flashcard at a time.',
+    title: 'Learning Languages',
+    description: 'A way to connect with people and cultures around the world.',
   },
   {
     emoji: '📚',
-    title: 'Reading',
-    description: 'Mostly non-fiction, design books, and the occasional thriller for balance.',
+    title: 'Reading & Painting',
+    description: 'Relaxing with a good book or getting creative with some paint and canvas.',
   },
 ]
 </script>

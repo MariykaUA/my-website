@@ -3,16 +3,28 @@
     <div class="container">
       <div class="section-header reveal">
         <p class="projects__eyebrow">work</p>
-        <h2 class="section-title">My Projects</h2>
-        <p class="section-subtitle">A mix of design, frontend, and everything in between</p>
+        <h2 class="section-title">My Projects <img :src="catGif" class="section-cat" alt="" />
+        </h2>
+      </div>
+
+      <div class="projects__filters reveal">
+        <button
+          v-for="f in filters"
+          :key="f"
+          class="projects__filter-btn"
+          :class="{ 'projects__filter-btn--active': activeFilter === f }"
+          @click="activeFilter = f"
+        >
+          {{ f }}
+        </button>
       </div>
 
       <div class="projects__grid">
         <article
-          v-for="(project, i) in projects"
+          v-for="(project, i) in filteredProjects"
           :key="project.title"
-          class="projects__card reveal"
-          :style="`transition-delay: ${i * 0.1}s`"
+          class="projects__card"
+          :style="`animation-delay: ${i * 0.08}s`"
         >
           <div class="projects__thumbnail" :style="`background: ${project.bg}`">
             <span class="projects__emoji">{{ project.emoji }}</span>
@@ -48,10 +60,17 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import BaseTag from '@/components/ui/BaseTag.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
+import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
+
+const filters = ['All', 'Figma', 'Frontend', 'User Testing'] as const
+type Filter = typeof filters[number]
+
+const activeFilter = ref<Filter>('All')
 
 const projects = [
   {
@@ -64,6 +83,7 @@ const projects = [
     tags: ['Vue 3', 'TypeScript', 'SCSS', 'Vite'],
     live: null,
     github: null,
+    categories: ['Frontend', 'Figma'],
   },
   {
     title: 'Travel Blog',
@@ -75,8 +95,27 @@ const projects = [
     tags: ['Vue 3', 'Vue Router', 'Pinia', 'SCSS'],
     live: '/blog',
     github: null,
+    categories: ['Frontend'],
+  },
+  {
+    title: 'UX Research Study',
+    type: 'User Testing',
+    year: '2024',
+    description: 'End-to-end usability testing project — recruited participants, ran moderated sessions, synthesised findings into actionable design recommendations.',
+    emoji: '🔬',
+    bg: 'linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%)',
+    tags: ['Lyssna', 'Figma', 'Research'],
+    live: null,
+    github: null,
+    categories: ['User Testing', 'Figma'],
   },
 ]
+
+const filteredProjects = computed(() =>
+  activeFilter.value === 'All'
+    ? projects
+    : projects.filter(p => p.categories.includes(activeFilter.value))
+)
 </script>
 
 <style scoped lang="scss">
@@ -90,11 +129,47 @@ const projects = [
     margin-bottom: $space-4;
   }
 
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-2;
+    margin-bottom: $space-10;
+  }
+
+  &__filter-btn {
+    padding: $space-2 $space-5;
+    border-radius: $radius-full;
+    border: 1.5px solid $color-border;
+    background: $color-white;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color $transition-fast, background $transition-fast, color $transition-fast, transform $transition-fast;
+
+    &:hover {
+      border-color: $color-primary-light;
+      color: $color-primary;
+      transform: translateY(-1px);
+    }
+
+    &--active {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $color-white;
+
+      &:hover {
+        transform: translateY(-1px);
+        color: $color-white;
+      }
+    }
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-8;
-    margin-top: $space-12;
 
     @include respond-to(md) { grid-template-columns: repeat(2, 1fr); }
   }
@@ -106,6 +181,7 @@ const projects = [
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    animation: cardFadeIn 0.35s ease both;
     transition: box-shadow $transition-base, transform $transition-base, border-color $transition-base;
 
     &:hover {
@@ -233,5 +309,10 @@ const projects = [
     padding: 0;
     margin: 0;
   }
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 </style>

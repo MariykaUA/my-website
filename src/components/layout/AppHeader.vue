@@ -3,7 +3,7 @@
     <div class="header__inner container">
       <RouterLink to="/" class="header__logo">
         <span class="header__logo-mark">M</span>
-        <span class="header__logo-text">aria</span>
+        <span class="header__logo-text">ariia</span>
       </RouterLink>
 
       <nav class="header__nav" :class="{ 'header__nav--open': menuOpen }">
@@ -36,9 +36,9 @@ const menuOpen = ref(false)
 
 const navLinks: NavLink[] = [
   { label: 'Home',       to: '/',           exact: true },
-  { label: 'About',      to: '/about' },
-  { label: 'Blog',       to: '/blog' },
-  { label: 'Flashcards', to: '/flashcards' }
+  //{ label: 'About',      to: '/about' },
+  //{ label: 'Blog',       to: '/blog' },
+  //{ label: 'Flashcards', to: '/flashcards' }
 ]
 </script>
 
@@ -63,6 +63,7 @@ const navLinks: NavLink[] = [
   &__inner {
     @include flex-between;
     height: 100%;
+    padding: 18px;
   }
 
   &__logo {

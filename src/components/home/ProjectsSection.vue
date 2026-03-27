@@ -157,6 +157,9 @@ import { ref, computed } from 'vue'
 import BaseTag from '@/components/ui/BaseTag.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 import imgSayslife from '@/assets/images/projects/sayslife.png'
+import imgSayslifeCards from '@/assets/images/projects/sayslife-cards.png'
+import imgSayslifeContacts from '@/assets/images/projects/sayslife-contacts.png'
+import imgSayslifeOffers from '@/assets/images/projects/sayslife-offers.png'
 import imgOniShop from '@/assets/images/projects/oni-shop.png'
 import imgOniShopGallery from '@/assets/images/projects/oni-shop-gallery.png'
 import imgOniShopMobile1 from '@/assets/images/projects/oni-shop-mobile1.png'
@@ -187,22 +190,21 @@ const projects = [
     title: 'Redesign "Sayslife" website',
     type: 'Web design',
     year: '2026',
-    description: 'Focus on usability, visual clarity, and overall user experience.',
+    description: 'Redesign project for "Sayslife" company to create an intuitive website experience with trustworthy information. With focus on usability, visual clarity, and overall user experience.',
     img: imgSayslife,
     gallery: [imgSayslife],
-    visuals: [],
+    visuals: [imgSayslifeOffers, imgSayslifeCards, imgSayslifeContacts],
     tags: ['Figma', 'Elementor', 'Wordpress', 'SCSS'],
     live: null,
     github: null,
     categories: ['Figma'],
-    problem: 'The existing site lacked visual hierarchy and made it hard for users to find key information quickly.',
-    built: 'A fully redesigned website with a new layout, refreshed color system, and improved content structure.',
-    process: 'Conducted UX research to identify pain points, then rebuilt the design from wireframes to high-fidelity in Figma. Implemented using Elementor and WordPress with custom SCSS for consistent styling across all breakpoints.',
-    challenges: 'Balancing the client\'s existing brand with a modernised visual direction — solved by presenting mood boards and a structured design system early in the process.',
+    problem: 'Users find the website confusing, struggle to navigate it, and often cannot immediately understand the purpose of the service. Goal - update the website with more engaging experience and improve sales conversion.',
+    built: 'Based on UX research I refined layouts, typography, and color system to create a clearer and more engaging user interactions. The new design focuses on clear communication of the service\'s value proposition, easy navigation, and a more modern storytelling approach.',
+    process: 'Conducted UX research to identify pain points and create user persona, then rebuilt the design from wireframes to high-fidelity in Figma. Implemented using Elementor and WordPress with custom SCSS for consistent styling across all breakpoints. The redesign focused on improving the user flow, making key information more accessible, and creating a visually appealing layout that encourages users to explore the site and book a sales call.',
+    challenges: 'Don\'t loose current content, but redesign and copy should be enhanced for greater clarity. Ensuring users understand the content and interested in booking a sales call.',
     learnings: [
-      'UX research findings directly shaped which layout changes had the most impact',
-      'Starting with a component library avoids visual inconsistency later',
-      'Working within CMS constraints pushes creative problem-solving',
+      'Starting with a component library avoids visual inconsistency later.',
+      'Elementor is a powerful tool for building WordPress sites, but custom SCSS was necessary to achieve the desired design and responsiveness.',
     ],
   },
   {

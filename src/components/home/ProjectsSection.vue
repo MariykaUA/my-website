@@ -161,6 +161,8 @@ import imgOniShopMobile2 from '@/assets/images/projects/oni-shop-mobile2.png'
 import imgEcap from '@/assets/images/projects/ecap.png'
 import imgPrintShop from '@/assets/images/projects/print-shop.png'
 import imgLyssna from '@/assets/images/projects/lyssna-test.png'
+import img8secTest from '@/assets/images/projects/8sec-test.png'
+import img8secTestTable from '@/assets/images/projects/8sec-test-table.png'
 
 useScrollAnimation()
 
@@ -183,14 +185,12 @@ const projects = [
     categories: ['Figma'],
     problem: 'The existing site lacked visual hierarchy and made it hard for users to find key information quickly.',
     built: 'A fully redesigned website with a new layout, refreshed color system, and improved content structure.',
-    process: ['Responsive layouts for all screen sizes'],
-    challenges: [
-      { problem: 'Inconsistent visual style', solution: 'Created a shared design system in Figma before touching layouts' },
-      { problem: 'Content overload on key pages', solution: 'Reorganised sections using card hierarchy and progressive disclosure' },
-    ],
+    process: 'Conducted UX research to identify pain points, then rebuilt the design from wireframes to high-fidelity in Figma. Implemented using Elementor and WordPress with custom SCSS for consistent styling across all breakpoints.',
+    challenges: 'Balancing the client\'s existing brand with a modernised visual direction — solved by presenting mood boards and a structured design system early in the process.',
     learnings: [
       'UX research findings directly shaped which layout changes had the most impact',
       'Starting with a component library avoids visual inconsistency later',
+      'Working within CMS constraints pushes creative problem-solving',
     ],
   },
   {
@@ -227,16 +227,14 @@ const projects = [
     live: null,
     github: null,
     categories: ['Figma'],
-    problem: 'The ECAP school site felt outdated and made it difficult for students and parents to find important information.',
-    built: 'A modern redesign with clear navigation, improved content hierarchy, and an interactive Figma prototype.',
-    features: ['Clear info architecture', 'Mobile-first layouts', 'Interactive prototype', 'Design system in Figma', 'Accessibility improvements'],
-    challenges: [
-      { problem: 'Too much content competing for attention', solution: 'Grouped related content into cards with clear visual priority' },
-      { problem: 'Stakeholder alignment on visual direction', solution: 'Presented mood boards before high-fidelity to align expectations early' },
-    ],
+    problem: 'The ECAP school site felt outdated and made it difficult for students and parents to find important information quickly.',
+    built: 'A modern redesign with clear navigation, improved content hierarchy, and an interactive Figma prototype showcasing mobile and desktop views.',
+    process: 'Started with a content audit and user flow mapping, then created wireframes before moving to high-fidelity in Figma. Built a reusable component set and an interactive prototype for stakeholder review.',
+    challenges: 'Too much content competing for attention on key pages — solved by reorganising sections into clearly prioritised cards and introducing progressive disclosure for secondary content.',
     learnings: [
       'Education sites need clear information architecture above all else',
       'Presenting design rationale, not just visuals, leads to much better feedback',
+      'Wireframes first saves significant rework time at the high-fidelity stage',
     ],
   },
   {
@@ -251,40 +249,35 @@ const projects = [
     live: null,
     github: null,
     categories: ['Frontend'],
-    problem: 'Build a full-stack e-commerce experience to practice React.js and relational database integration.',
-    built: 'A print shop web app with product browsing, purchasing flow, and a user feedback system backed by MySQL.',
-    features: ['Product listing & detail pages', 'Purchase flow', 'User feedback/reviews', 'MySQL backend', 'REST API'],
-    challenges: [
-      { problem: 'Async data fetching causing UI flicker', solution: 'Added loading and error states for all async operations' },
-      { problem: 'Relational schema design for orders + reviews', solution: 'Planned the schema with foreign keys before writing any code' },
-    ],
+    problem: 'Needed a hands-on full-stack project to practise React.js with a real relational database and REST API.',
+    built: 'A print shop web app with product listing, detail pages, a purchasing flow, and a user feedback system backed by MySQL.',
+    process: 'Designed the relational schema first (products, orders, reviews), then built the REST API and connected it to a React.js frontend using hooks for state and data fetching. Styled with custom CSS and deployed via GitHub.',
+    challenges: 'Async data fetching caused UI flicker on slower connections — solved by adding loading skeletons and error states to every data-dependent component.',
     learnings: [
       'Designing the DB schema first prevents painful migrations later',
       'React hooks make async state management clean once patterns are clear',
+      'Loading and error states are not optional — they are part of the UX',
     ],
   },
   {
     title: 'First Click Test & 8-Second Test',
     type: 'User Testing',
     year: '2024',
-    description: 'Two user tests via Lyssna to evaluate UX of a live interface.',
+    description: 'Two user tests via Lyssna to evaluate User Experience.',
     img: imgLyssna,
     gallery: [imgLyssna],
-    visuals: [],
+    visuals: [img8secTest, img8secTestTable],
     tags: ['Lyssna'],
     live: null,
     github: null,
     categories: ['User Testing'],
-    problem: 'Identify navigation friction and first-impression weaknesses on a real product interface.',
-    built: 'Two structured user tests — a First Click Test and an 8-Second Test — with analysis and design recommendations.',
-    features: ['First Click Test', '8-Second Test', 'Participant analysis', 'Heatmaps', 'Design recommendations'],
-    challenges: [
-      { problem: 'Users missed the main CTA', solution: 'Increased visual weight and repositioned it above the fold' },
-      { problem: 'Value proposition unclear in 8 seconds', solution: 'Rewrote the headline to be benefit-focused and more direct' },
-    ],
+    problem: '1. To identify where users click first when given specific tasks on the website. 2. To assess how quickly users can grasp the main message and navigate the site within an 8-second timeframe.',
+    built: 'I used a heat map to visualise user clicks, which helped determine the most engaging elements. In the second test I collected cloud results to analyse participants feedback and reactions during the test.',
+    process: 'The same group of 10 users participated in both tests, providing valuable insights into their interactions with the site. Tasks: For the First Click Test, users were given specific tasks to complete on the website, and their clicks were tracked to see where they clicked first. For the 8-Second Test, users were asked to spend 8 seconds on the site and then provide feedback on their experience.',
+    challenges: 'The number of users was limited and the testing was conducted on a demo version of the site, which may have affected the naturalness of user interactions and the generalisability of the results.',
     learnings: [
-      'Quantitative click data combined with participant comments gives far richer insight than either alone',
-      'Small copy changes can have a bigger impact than layout changes',
+      'These user testing projects provided valuable insights into user behavior, helping to identify areas for improvement and enhance the overall experience.',      
+      'Small copy changes can have a bigger impact than layout changes.',
     ],
   },
 ]

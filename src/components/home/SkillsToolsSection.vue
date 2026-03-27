@@ -6,7 +6,7 @@
         <!-- Skills column -->
         <div class="st__col reveal">
           <p class="st__eyebrow">Expertise</p>
-          <h2 class="st__heading">Skills <img :src="catGif" class="section-cat" alt="" /></h2>
+          <h2 class="st__heading">Skills</h2>
           <div class="st__skill-groups">
             <div v-for="group in skillGroups" :key="group.category" class="st__group">
               <h3 class="st__category">{{ group.category }}</h3>
@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 

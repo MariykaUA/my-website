@@ -67,7 +67,7 @@ import catGif from '@/assets/images/Cat animation.gif'
   }
 
   &__title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
     line-height: 1.1;
     margin-bottom: $space-6;
   }

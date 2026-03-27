@@ -48,34 +48,33 @@ const skillGroups = [
   {
     category: 'Design',
     skills: [
+      { name: 'Responsive design' },
+      { name: 'User flows' },
       { name: 'Prototyping' },
-      { name: 'UI Design' },
+      { name: 'Wireframing' },
       { name: 'UX Research' },
-      { name: 'User Flows' },
+      { name: 'User Testing' },
+      { name: 'Typography' }, 
+      { name: 'Accessibility' }, 
+      { name: 'Color Theory' },
     ],
   },
   {
     category: 'Frontend',
     skills: [
-      { name: 'HTML / SCSS' },
-      { name: 'Vue 3 / TypeScript' },
-      { name: 'React' },
-      { name: 'Vite / Webpack' },
-    ],
-  },
-  {
-    category: 'Other',
-    skills: [
-      { name: 'Git / GitHub' },
-      { name: 'Content creation' },
-      { name: 'Copywriting' },
-      { name: 'Organisation and planning' },
+      { name: 'JavaScript' },
+      { name: 'HTML / SCSS / TypeScript' },
+      { name: 'Component-based development' },
+      { name: 'Database usage' },
+      { name: 'Tailwind CSS' },
+      { name: 'Testing' },
+      { name: 'Accessibility improvements' },
     ],
   },
   {
     category: 'Soft Skills',
     skills: [
-      { name: 'Communication' },
+      { name: 'Empathy & Teamwork' },
       { name: 'Problem solving' },
       { name: 'Attention to detail' },
       { name: 'Time management' },
@@ -84,16 +83,25 @@ const skillGroups = [
 ]
 
 const tools = [
-  { emoji: '🎨', name: 'Figma',       category: 'Design' },
-  { emoji: '💻', name: 'VS Code',     category: 'Dev' },
-  { emoji: '🟢', name: 'Vue 3',       category: 'Dev' },
-  { emoji: '📘', name: 'TypeScript',  category: 'Dev' },
-  { emoji: '⚡', name: 'Vite',        category: 'Dev' },
-  { emoji: '🐙', name: 'GitHub',      category: 'Dev' },
-  { emoji: '📋', name: 'Notion',      category: 'Productivity' },
-  { emoji: '📸', name: 'Lightroom',   category: 'Photo' },
-  { emoji: '☁️', name: 'Netlify',     category: 'Deploy' },
-  { emoji: '🔍', name: 'Lyssna',      category: 'Research' },
+  { emoji: '🎨', name: 'Figma', category: 'Design' },
+  { emoji: '💻', name: 'VS Code', category: 'Dev' },
+  { emoji: '💻', name: 'Vue.js', category: 'Dev' },
+  { emoji: '💻', name: 'React.js', category: 'Dev' },
+  { emoji: '⚡', name: 'Claude', category: 'AI' },
+  { emoji: '⚡', name: 'GitHub', category: 'Dev' },
+  { emoji: '💻', name: 'Contentful', category: 'Dev' },
+  { emoji: '💻', name: 'Storybook', category: 'Dev' },
+  { emoji: '💻', name: 'MySQL', category: 'Dev' },
+  { emoji: '💻', name: 'Nuxt', category: 'Dev' },
+  { emoji: '💻', name: 'Vitest', category: 'Dev' },
+  { emoji: '💻', name: 'Wordpress', category: 'Dev' },
+  { emoji: '💻', name: 'Git', category: 'Dev' },
+  { emoji: '💻', name: 'Firebase', category: 'Dev' },
+  { emoji: '☁️', name: 'Netlify', category: 'Deploy' },
+  { emoji: '🔍', name: 'Lyssna',category: 'Research' },
+  { emoji: '🎨', name: 'Canva', category: 'Design' },
+  { emoji: '🎨', name: 'Sketch', category: 'Design' },
+  { emoji: '🎨', name: 'Adobe Illustrator', category: 'Design' },
 ]
 </script>
 
@@ -201,12 +209,6 @@ const tools = [
     border-radius: $radius-xl;
     text-align: center;
     transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
-
-    &:hover {
-      border-color: $color-primary-light;
-      box-shadow: $shadow-md;
-      transform: translateY(-3px);
-    }
   }
 
   &__tool-emoji { font-size: 1.6rem; }

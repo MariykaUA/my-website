@@ -7,7 +7,7 @@
           <h2 class="intro__title">Turning ideas into interactive experiences.</h2>
 <p>With the passion for UX/UI design, I really love bringing creative ideas to life with code. Alongside my design skills, I have hands-on experience as a Software Engineer Intern at On AG, especially in Vue.js, SCSS, and Typescript. I'm continuously learning and exploring new ways to enhance user experiences through thoughtful design and development.</p>
           <p>When I'm not designing or coding, you'll find me somewhere with a map, exploring new places, running, or just enjoying the nature.</p>
-          <BaseButton to="/about" variant="secondary">My full story →</BaseButton>
+          <!-- <BaseButton to="/about" variant="secondary">My full story →</BaseButton> -->
         </div>
         <div class="intro__stats reveal" style="transition-delay: 0.15s">
           <div v-for="stat in stats" :key="stat.label" class="intro__stat">
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseButton from '@/components/ui/BaseButton.vue'
+//import BaseButton from '@/components/ui/BaseButton.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 useScrollAnimation()

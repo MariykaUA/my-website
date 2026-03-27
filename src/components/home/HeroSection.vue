@@ -11,7 +11,7 @@
         <p class="hero__subtitle animate-fade-in-up" style="animation-delay: 0.2s">Dreamer, creator, and curious human passionate about building user-friendly websites.
         </p>
         <div class="hero__actions animate-fade-in-up" style="animation-delay: 0.3s">
-          <BaseButton to="/about" size="lg">Contact me</BaseButton>
+          <BaseButton href="https://www.linkedin.com/in/mariiahoienko1999/" target="_blank" rel="noopener" class="contact__item">Contact me</BaseButton>
           <img class="hero__cat" :src="catGif" alt="" />
         </div>
       </div>

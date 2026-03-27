@@ -26,7 +26,7 @@ useScrollAnimation()
 const items = [
   
 {
-    emoji: '📸',
+    emoji: '🗺️',
     title: 'Orieneering & Running',
     description: 'Running is my go-to for clearing my head, and orienteering adds a fun twist with maps and checkpoints.',
   },{
@@ -35,7 +35,7 @@ const items = [
     description: 'Exploring new countries, getting lost in new cities, and collecting passport stamps.',
   },
   {
-    emoji: '🇩🇪',
+    emoji: '🌍',
     title: 'Learning Languages',
     description: 'A way to connect with people and cultures around the world.',
   },
@@ -65,11 +65,11 @@ const items = [
     padding: $space-8;
     transition: box-shadow $transition-base, transform $transition-base, border-color $transition-base;
 
-    &:hover {
+    /*&:hover {
       box-shadow: $shadow-lg;
       transform: translateY(-4px);
       border-color: $color-primary-light;
-    }
+    }*/
   }
 
   &__icon {

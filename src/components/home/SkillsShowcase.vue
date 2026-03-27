@@ -26,7 +26,7 @@ const items = [
   
 {
     emoji: '🗺️',
-    title: 'Orieneering & Running',
+    title: 'Orienteering & Running',
     description: 'Running is my go-to for clearing my head, and orienteering adds a fun twist with maps and checkpoints.',
   },{
     emoji: '✈️',

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="section-header reveal">
         <p class="projects__eyebrow">work</p>
-        <h2 class="section-title">My Projects <img :src="catGif" class="section-cat" alt="" /></h2>
+        <h2 class="section-title">My Projects</h2>
       </div>
 
       <div class="projects__filters reveal">
@@ -66,10 +66,10 @@
               </ul>
               <div class="modal__header-links" v-if="selected.live || selected.github">
                 <a v-if="selected.live" :href="selected.live" target="_blank" rel="noopener" class="modal__extra-link">
-                  🌐 Live demo ↗
+                  Live ↗
                 </a>
                 <a v-if="selected.github" :href="selected.github" target="_blank" rel="noopener" class="modal__extra-link modal__extra-link--ghost">
-                  🐙 GitHub ↗
+                  GitHub ↗
                 </a>
               </div>
             </div>
@@ -153,7 +153,6 @@
 import { ref, computed } from 'vue'
 import BaseTag from '@/components/ui/BaseTag.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import catGif from '@/assets/images/Cat animation.gif'
 import imgSayslife from '@/assets/images/projects/sayslife.png'
 import imgOniShop from '@/assets/images/projects/oni-shop.png'
 import imgOniShopGallery from '@/assets/images/projects/oni-shop-gallery.png'

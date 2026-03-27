@@ -2,7 +2,7 @@
   <section class="beyond section">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Beyond the screen <img :src="catGif" class="section-cat" alt="" /></h2>
+        <h2 class="section-title">Beyond the screen</h2>
         <p class="section-subtitle">Being inspired outside of work</p>
       </div>
 
@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 

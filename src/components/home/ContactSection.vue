@@ -3,7 +3,7 @@
     <div class="container">
       <div class="contact__inner reveal">
         <p class="contact__eyebrow">Get in touch</p>
-        <h2 class="contact__heading">Stay in touch <img :src="catGif" class="section-cat" alt="" /></h2>
+        <h2 class="contact__heading">Stay in touch</h2>
         <p class="contact__sub">Whether you have a project in mind, a question, or just want to say hi — I'd love to hear from you.</p>
 
         <div class="contact__links">
@@ -29,7 +29,6 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import catGif from '@/assets/images/Cat animation.gif'
 
 useScrollAnimation()
 </script>

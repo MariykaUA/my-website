@@ -94,6 +94,7 @@ const tools = [
   { emoji: '💻', name: 'MySQL', category: 'Dev' },
   { emoji: '💻', name: 'Nuxt', category: 'Dev' },
   { emoji: '💻', name: 'Vitest', category: 'Dev' },
+  { emoji: '💻', name: 'Elementor', category: 'Dev' },
   { emoji: '💻', name: 'Wordpress', category: 'Dev' },
   { emoji: '💻', name: 'Git', category: 'Dev' },
   { emoji: '💻', name: 'Firebase', category: 'Dev' },

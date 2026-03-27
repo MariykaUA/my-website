@@ -103,7 +103,10 @@
 
             <div class="modal__section">
               <h3 class="modal__section-title">Design process / Technical aspects</h3>
-              <p class="modal__section-text">{{ selected.process }}</p>
+              <template v-if="Array.isArray(selected.process)">
+                <p v-for="(p, i) in selected.process" :key="i" class="modal__section-text">{{ p }}</p>
+              </template>
+              <p v-else class="modal__section-text">{{ selected.process }}</p>
             </div>
 
             <div v-if="selected.visuals.length" class="modal__section">
@@ -159,7 +162,16 @@ import imgOniShopGallery from '@/assets/images/projects/oni-shop-gallery.png'
 import imgOniShopMobile1 from '@/assets/images/projects/oni-shop-mobile1.png'
 import imgOniShopMobile2 from '@/assets/images/projects/oni-shop-mobile2.png'
 import imgEcap from '@/assets/images/projects/ecap.png'
+import imgEcap1 from '@/assets/images/projects/ecap1.png'
+import imgEcap2 from '@/assets/images/projects/ecap2.png'
+import imgEcapFlow from '@/assets/images/projects/ecap-flow.png'
+import imgEcapFlow2 from '@/assets/images/projects/ecap-flow2.png'
+import imgEcapSitemap from '@/assets/images/projects/ecap-sitemap.png'
+import imgEcapWireframe from '@/assets/images/projects/ecap-wireframe.png'
+import imgEcapWireframe2 from '@/assets/images/projects/ecap-wireframe2.png'
 import imgPrintShop from '@/assets/images/projects/print-shop.png'
+import imgPrintShopMain from '@/assets/images/projects/print-shop-main.png'
+import imgPrintShopFeedbacks from '@/assets/images/projects/print-shop-feedbacks.png'
 import imgLyssna from '@/assets/images/projects/lyssna-test.png'
 import img8secTest from '@/assets/images/projects/8sec-test.png'
 import img8secTestTable from '@/assets/images/projects/8sec-test-table.png'
@@ -219,44 +231,47 @@ const projects = [
     title: 'Redesign "ECAP" website',
     type: 'Web design',
     year: '2024',
-    description: 'A UX/UI redesign for ECAP school.',
+    description: 'The Figma redesign project for ECAP school was an opportunity for me to demonstrate and refine my UX/UI design skills.',
     img: imgEcap,
     gallery: [imgEcap],
-    visuals: [],
+    visuals: [imgEcap1, imgEcap2, imgEcapFlow, imgEcapFlow2, imgEcapSitemap, imgEcapWireframe, imgEcapWireframe2],
     tags: ['Figma'],
     live: null,
     github: null,
     categories: ['Figma'],
     problem: 'The ECAP school site felt outdated and made it difficult for students and parents to find important information quickly.',
-    built: 'A modern redesign with clear navigation, improved content hierarchy, and an interactive Figma prototype showcasing mobile and desktop views.',
-    process: 'Started with a content audit and user flow mapping, then created wireframes before moving to high-fidelity in Figma. Built a reusable component set and an interactive prototype for stakeholder review.',
-    challenges: 'Too much content competing for attention on key pages — solved by reorganising sections into clearly prioritised cards and introducing progressive disclosure for secondary content.',
+    built: 'The project included key elements such as designing the user flow, creating a sitemap, developing wireframes, building a prototype with smart animations. I also focused on creating components, layouts and UI Kit',
+    process: [ 'Research & Planning: started by understanding ECAP School’s offerings and structure, focusing on how users navigate through the site. This was crucial for designing an intuitive user flow and a comprehensive sitemap.',
+
+    'Initial low-fidelity wireframes and sketches were created to define the layout of key pages.',
+
+    'The wireframes were translated into a functional prototype, with a focus on interactivity using Figma’s smart animations. This allowed users to experience smooth transitions between pages and elements, enhancing the overall user experience.',
+
+   'Different layouts were explored and implemented to handle content across various pages, ensuring responsiveness and usability. For example, the courses page displayed a grid of available courses, while the languages page allowed users to filter based on their language preferences.'],
+
+    challenges: 'Implementing smart animations that added value to the user experience without becoming distracting. Ensuring visual and functional consistency across various pages and components was challenging, particularly when dealing with multiple layouts and interactive elements.',
     learnings: [
-      'Education sites need clear information architecture above all else',
-      'Presenting design rationale, not just visuals, leads to much better feedback',
-      'Wireframes first saves significant rework time at the high-fidelity stage',
+      'I gained valuable experience in component-based design, learning how reusable elements can streamline the design process and ensure consistency across different parts of a project. This project helped me develop problem-solving strategies and reinforced the importance of attention to detail in UX/UI design.',
     ],
   },
   {
     title: 'Print Shop',
     type: 'Development',
     year: '2024',
-    description: 'A web app for browsing and purchasing prints.',
+    description: 'The Print Shop project is a web application built with React.js for the frontend and MySQL for the backend, designed to offer users a seamless experience in browsing, purchasing prints, and leaving feedback.',
     img: imgPrintShop,
     gallery: [imgPrintShop],
-    visuals: [],
+    visuals: [imgPrintShopMain, imgPrintShopFeedbacks],
     tags: ['React.js', 'GitHub', 'MySQL', 'Git'],
     live: null,
-    github: null,
+    github: 'https://github.com/MariykaUA/print-shop',
     categories: ['Frontend'],
-    problem: 'Needed a hands-on full-stack project to practise React.js with a real relational database and REST API.',
-    built: 'A print shop web app with product listing, detail pages, a purchasing flow, and a user feedback system backed by MySQL.',
-    process: 'Designed the relational schema first (products, orders, reviews), then built the REST API and connected it to a React.js frontend using hooks for state and data fetching. Styled with custom CSS and deployed via GitHub.',
-    challenges: 'Async data fetching caused UI flicker on slower connections — solved by adding loading skeletons and error states to every data-dependent component.',
+    problem: 'Gaining a hands-on experience building a full-stack project to practise React.js with a real relational database and REST API.',
+    built: 'Users can browse a gallery of prints, view details, see feedbacks, and add product to cart.',
+    process: 'Flexbox is used to create a responsive and fluid layout. Media queries ensure that the design is responsive across devices (desktop, tablet, mobile). MySQL Integration: Data stored in MySQL for products and feedback. REST API built to handle frontend requests and database interactions. GitHub used for version control, with regular commits and a clear commit history to track development progress.',
+    challenges: 'Syncing data between frontend and backend',
     learnings: [
-      'Designing the DB schema first prevents painful migrations later',
-      'React hooks make async state management clean once patterns are clear',
-      'Loading and error states are not optional — they are part of the UX',
+      'Overall, this project has helped me understand how to effectively manage data and create a user-friendly interface. It reinforced the importance of planning the database schema and API design before diving into frontend development, and highlighted the challenges of ensuring smooth data flow between the frontend and backend.',
     ],
   },
   {

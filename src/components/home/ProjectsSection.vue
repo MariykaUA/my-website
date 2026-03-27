@@ -26,8 +26,8 @@
           class="projects__card"
           :style="`animation-delay: ${i * 0.08}s`"
         >
-          <div class="projects__thumbnail" :style="`background: ${project.bg}`">
-            <span class="projects__emoji">{{ project.emoji }}</span>
+          <div class="projects__thumbnail">
+            <img class="projects__img" :src="project.img" :alt="project.title" />
             <div class="projects__overlay">
               <div class="projects__links">
                 <a v-if="project.live" :href="project.live" target="_blank" rel="noopener" class="projects__link">
@@ -64,6 +64,11 @@ import { ref, computed } from 'vue'
 import BaseTag from '@/components/ui/BaseTag.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 import catGif from '@/assets/images/Cat animation.gif'
+import imgSayslife from '@/assets/images/projects/sayslife.png'
+import imgOniShop from '@/assets/images/projects/oni-shop.png'
+import imgEcap from '@/assets/images/projects/ecap.png'
+import imgPrintShop from '@/assets/images/projects/print-shop.png'
+import imgLyssna from '@/assets/images/projects/lyssna-test.png'
 
 useScrollAnimation()
 
@@ -74,40 +79,59 @@ const activeFilter = ref<Filter>('All')
 
 const projects = [
   {
-    title: 'My Portfolio Website',
-    type: 'Design & Development',
-    year: '2024',
-    description: 'Designed and built this very site from scratch — Vue 3, TypeScript, SCSS, animated particle background, and a German flashcard game baked right in.',
-    emoji: '🌐',
-    bg: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%)',
-    tags: ['Vue 3', 'TypeScript', 'SCSS', 'Vite'],
+    title: 'Redesign “Sayslife” website',
+    type: 'Web design',
+    year: '2026',
+    description: 'Focus on usability, visual clarity, and overall user experience. Based on UX research I refined layouts, typography, and color system to create a clearer and more engaging user interactions.',
+    img: imgSayslife,
+    tags: ['Figma', 'Elementor', 'Wordpress', 'SCSS'],
     live: null,
     github: null,
-    categories: ['Frontend', 'Figma'],
+    categories: ['Figma'],
   },
   {
-    title: 'Travel Blog',
-    type: 'Design & Content',
-    year: '2024',
-    description: 'A personal blog covering 15+ countries — filtering by category, responsive card grid, and full-article reading experience with Markdown-style content.',
-    emoji: '✈️',
-    bg: 'linear-gradient(135deg, #ECFDF5 0%, #A7F3D0 100%)',
-    tags: ['Vue 3', 'Vue Router', 'Pinia', 'SCSS'],
-    live: '/blog',
+    title: 'Oni-shop e-commerce app',
+    type: 'Development',
+    year: '2025',
+    description: 'The Oni-shop project is a e-commerce web application built with Vue.js and Nuxt3 for the frontend and Firebase for the backend, designed to learn the front-end development tools and features of the On company.',
+    img: imgOniShop,
+    tags: ['Vue.js', 'GitHub', 'TypeScript', 'Jira', 'SCSS'],
+    live: null,
     github: null,
     categories: ['Frontend'],
   },
   {
-    title: 'UX Research Study',
-    type: 'User Testing',
+    title: 'Redesign “ECAP” website',
+    type: 'Web design',
     year: '2024',
-    description: 'End-to-end usability testing project — recruited participants, ran moderated sessions, synthesised findings into actionable design recommendations.',
-    emoji: '🔬',
-    bg: 'linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%)',
-    tags: ['Lyssna', 'Figma', 'Research'],
+    description: 'The redesign project for ECAP school was an opportunity for me to demonstrate and refine my UX/UI design skills.',
+    img: imgEcap,
+    tags: ['Figma'],
     live: null,
     github: null,
-    categories: ['User Testing', 'Figma'],
+    categories: ['Figma'],
+  },
+  {
+    title: 'Print Shop',
+    type: 'Development',
+    year: '2024',
+    description: 'The Print Shop project is a web application built with React.js for the frontend and MySQL for the backend, designed to offer users a seamless experience in browsing, purchasing prints, and leaving feedback.',
+    img: imgPrintShop,
+    tags: ['React.js', 'GitHub', 'MySQL', 'Git'],
+    live: null,
+    github: null,
+    categories: ['Frontend'],
+  },
+  {
+    title: 'First Click Test & 8-Second Test',
+    type: 'User Testing',
+    year: '2024',
+    description: 'I executed two user testing projects for the site Lyssna to evaluate the user experience.',
+    img: imgLyssna,
+    tags: ['Lyssna'],
+    live: null,
+    github: null,
+    categories: ['User Testing'],
   },
 ]
 
@@ -193,25 +217,24 @@ const filteredProjects = computed(() =>
         opacity: 1;
       }
 
-      .projects__emoji {
-        transform: scale(1.15);
+      .projects__img {
+        transform: scale(1.05);
       }
     }
   }
 
   &__thumbnail {
     position: relative;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 300px;
     overflow: hidden;
   }
 
-  &__emoji {
-    font-size: 3.5rem;
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
     transition: transform $transition-base;
-    user-select: none;
   }
 
   &__overlay {

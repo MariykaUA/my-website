@@ -17,9 +17,8 @@
       </div>
 
       <div class="hero__visual animate-fade-in" style="animation-delay: 0.4s">
-        <div class="hero__blob" />
-        <div class="hero__avatar">
-          <img :src="myPhoto" alt="Maria — photo" />
+        <div class="hero__illustration">
+          <img :src="meIllustration" alt="Maria illustration" />
         </div>
       </div>
     </div>
@@ -29,7 +28,7 @@
 
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
-import myPhoto from '@/assets/images/my-photo.jpg'
+import meIllustration from '@/assets/images/illustrations/me.png'
 import catGif from '@/assets/images/Cat animation.gif'
 
 </script>
@@ -39,7 +38,7 @@ import catGif from '@/assets/images/Cat animation.gif'
   min-height: calc(100vh - $header-height);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
 
@@ -47,7 +46,7 @@ import catGif from '@/assets/images/Cat animation.gif'
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-12;
-    padding-block: $space-20;
+    padding-block: $space-6;
     align-items: center;
     position: relative;
     z-index: 1;
@@ -99,39 +98,24 @@ import catGif from '@/assets/images/Cat animation.gif'
     justify-content: center;
   }
 
-  &__blob {
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    background: linear-gradient(135deg, $color-primary-subtle, #DDD6FE);
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    animation: pulse 8s ease-in-out infinite;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-  }
-
-  &__avatar {
+&__illustration {
     position: relative;
     z-index: 1;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid $color-white;
-    box-shadow: $shadow-xl;
+    width: 340px;
+    margin-left: $space-12;
 
     @include respond-to(md) {
-      width: 340px;
-      height: 400px;
+      width: 400px;
+      margin-left: $space-16;
     }
 
     img {
       width: 100%;
-      height: 100%;
-      scale: 1;
-      object-fit: cover;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba($color-primary, 0.2));
+      mask-image: radial-gradient(ellipse 88% 85% at 50% 42%, black 55%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 88% 85% at 50% 42%, black 55%, transparent 100%);
     }
   }
 

@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import iconEmail from '@/assets/images/icons/email.png'
+import iconEmail from '@/assets/images/icons/Email.png'
 import iconGitHub from '@/assets/images/icons/GitHub.png'
 import iconLinkedin from '@/assets/images/icons/linkedin.png'
 

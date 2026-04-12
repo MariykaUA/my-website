@@ -26,7 +26,7 @@
           <h2 class="st__heading">Tools</h2>
           <div class="st__tools-grid">
             <div v-for="(tool, i) in tools" :key="tool.name" class="st__tool reveal" :style="`transition-delay: ${i * 0.04}s`">
-              <span class="st__tool-emoji">{{ tool.emoji }}</span>
+              <img :src="tool.icon" :alt="tool.name" class="st__tool-icon" />
               <span class="st__tool-name">{{ tool.name }}</span>
               <span class="st__tool-cat">{{ tool.category }}</span>
             </div>
@@ -40,6 +40,26 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
+import iconFigma from '@/assets/images/icons/figma.png'
+import iconVSCode from '@/assets/images/icons/vscode.png'
+import iconVue from '@/assets/images/icons/vue.png'
+import iconReact from '@/assets/images/icons/react.png'
+import iconClaude from '@/assets/images/icons/claude.png'
+import iconGitHub from '@/assets/images/icons/GitHub.png'
+import iconContentful from '@/assets/images/icons/contentful.png'
+import iconStorybook from '@/assets/images/icons/storybook.png'
+import iconMySQL from '@/assets/images/icons/mysql.png'
+import iconNuxt from '@/assets/images/icons/nuxt.png'
+import iconVitest from '@/assets/images/icons/vitest.png'
+import iconElementor from '@/assets/images/icons/elementor.png'
+import iconWordpress from '@/assets/images/icons/wordpress.png'
+import iconGit from '@/assets/images/icons/git.png'
+import iconFirebase from '@/assets/images/icons/firebase.png'
+import iconNetlify from '@/assets/images/icons/netlify.png'
+import iconLyssna from '@/assets/images/icons/lyssna.png'
+import iconCanva from '@/assets/images/icons/canva.png'
+import iconSketch from '@/assets/images/icons/sketch.png'
+import iconAdobeIllustrator from '@/assets/images/icons/adobeIllustratorr.png'
 
 useScrollAnimation()
 
@@ -82,26 +102,26 @@ const skillGroups = [
 ]
 
 const tools = [
-  { emoji: '🎨', name: 'Figma', category: 'Design' },
-  { emoji: '💻', name: 'VS Code', category: 'Dev' },
-  { emoji: '💻', name: 'Vue.js', category: 'Dev' },
-  { emoji: '💻', name: 'React.js', category: 'Dev' },
-  { emoji: '⚡', name: 'Claude', category: 'AI' },
-  { emoji: '⚡', name: 'GitHub', category: 'Dev' },
-  { emoji: '💻', name: 'Contentful', category: 'Dev' },
-  { emoji: '💻', name: 'Storybook', category: 'Dev' },
-  { emoji: '💻', name: 'MySQL', category: 'Dev' },
-  { emoji: '💻', name: 'Nuxt', category: 'Dev' },
-  { emoji: '💻', name: 'Vitest', category: 'Dev' },
-  { emoji: '💻', name: 'Elementor', category: 'Dev' },
-  { emoji: '💻', name: 'Wordpress', category: 'Dev' },
-  { emoji: '💻', name: 'Git', category: 'Dev' },
-  { emoji: '💻', name: 'Firebase', category: 'Dev' },
-  { emoji: '☁️', name: 'Netlify', category: 'Deploy' },
-  { emoji: '🔍', name: 'Lyssna',category: 'Research' },
-  { emoji: '🎨', name: 'Canva', category: 'Design' },
-  { emoji: '🎨', name: 'Sketch', category: 'Design' },
-  { emoji: '🎨', name: 'Adobe Illustrator', category: 'Design' },
+  { icon: iconFigma, name: 'Figma', category: 'Design' },
+  { icon: iconVSCode, name: 'VS Code', category: 'Dev' },
+  { icon: iconVue, name: 'Vue.js', category: 'Dev' },
+  { icon: iconReact, name: 'React.js', category: 'Dev' },
+  { icon: iconClaude, name: 'Claude', category: 'AI' },
+  { icon: iconGitHub, name: 'GitHub', category: 'Dev' },
+  { icon: iconContentful, name: 'Contentful', category: 'Dev' },
+  { icon: iconStorybook, name: 'Storybook', category: 'Dev' },
+  { icon: iconMySQL, name: 'MySQL', category: 'Dev' },
+  { icon: iconNuxt, name: 'Nuxt', category: 'Dev' },
+  { icon: iconVitest, name: 'Vitest', category: 'Dev' },
+  { icon: iconElementor, name: 'Elementor', category: 'Dev' },
+  { icon: iconWordpress, name: 'Wordpress', category: 'Dev' },
+  { icon: iconGit, name: 'Git', category: 'Dev' },
+  { icon: iconFirebase, name: 'Firebase', category: 'Dev' },
+  { icon: iconNetlify, name: 'Netlify', category: 'Deploy' },
+  { icon: iconLyssna, name: 'Lyssna', category: 'Research' },
+  { icon: iconCanva, name: 'Canva', category: 'Design' },
+  { icon: iconSketch, name: 'Sketch', category: 'Design' },
+  { icon: iconAdobeIllustrator, name: 'Adobe Illustrator', category: 'Design' },
 ]
 </script>
 
@@ -211,7 +231,11 @@ const tools = [
     transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
   }
 
-  &__tool-emoji { font-size: 1.6rem; }
+  &__tool-icon {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+  }
   &__tool-name  { font-size: $font-size-sm; font-weight: 600; }
   &__tool-cat   { font-size: $font-size-xs; color: $color-text-muted; }
 }

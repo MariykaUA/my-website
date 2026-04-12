@@ -4,21 +4,21 @@
       <div class="contact__inner reveal">
         <p class="contact__eyebrow">Get in touch</p>
         <h2 class="contact__heading">Stay in touch</h2>
-        <p class="contact__sub">Whether you have a project in mind, a question, or just want to say hi — I'd love to hear from you.</p>
+        <p class="contact__sub">Whether you have a project in mind, a question, or just want to say hi - I'd love to hear from you.</p>
 
         <div class="contact__links">
           <a href="mailto:mariiahoienko1999@gmail.com" class="contact__item">
-            <span class="contact__icon">✉️</span>
+            <img :src="iconEmail" alt="" class="contact__icon" />
             <span class="contact__label">Email ↗</span>
           </a>
 
           <a href="https://github.com/MariykaUA" target="_blank" rel="noopener" class="contact__item">
-            <span class="contact__icon">🐙</span>
+            <img :src="iconGitHub" alt="" class="contact__icon" />
             <span class="contact__label">GitHub ↗</span>
           </a>
 
           <a href="https://www.linkedin.com/in/mariiahoienko1999/" target="_blank" rel="noopener" class="contact__item">
-            <span class="contact__icon">💼</span>
+            <img :src="iconLinkedin" alt="" class="contact__icon" />
             <span class="contact__label">LinkedIn ↗</span>
           </a>
         </div>
@@ -29,6 +29,9 @@
 
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
+import iconEmail from '@/assets/images/icons/email.png'
+import iconGitHub from '@/assets/images/icons/GitHub.png'
+import iconLinkedin from '@/assets/images/icons/linkedin.png'
 
 useScrollAnimation()
 </script>
@@ -79,11 +82,11 @@ useScrollAnimation()
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $space-3;
+    gap: $space-2;
     flex: 1;
-    padding: $space-5 $space-6;
+    padding: $space-4 $space-4;
     background: $color-white;
-    border: 1px solid $color-border;
+    border: 1px solid $color-border-violet;
     border-radius: $radius-xl;
     text-decoration: none;
     transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
@@ -95,7 +98,11 @@ useScrollAnimation()
     }
   }
 
-  &__icon { font-size: 1.5rem; }
+  &__icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    object-fit: contain;
+  }
 
   &__label {
     font-size: $font-size-base;

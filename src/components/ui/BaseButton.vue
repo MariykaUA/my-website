@@ -47,15 +47,14 @@ const attrs = computed(() => ({
   justify-content: center;
   gap: $space-2;
   font-weight: 600;
-  border-radius: $radius-lg;
+  border-radius: $radius-full;
   cursor: pointer;
   transition: background $transition-fast, color $transition-fast,
               border-color $transition-fast, box-shadow $transition-fast,
               transform $transition-fast;
   text-decoration: none;
-  border: 2px solid transparent;
-
-  @include focus-ring;
+  border: none;
+  outline: none;
 
   &:active { transform: scale(0.97); }
 
@@ -69,12 +68,12 @@ const attrs = computed(() => ({
   &--primary {
     background: $color-primary;
     color: $color-white;
-    border-color: $color-primary;
+    box-shadow: $shadow-sm;
 
     &:hover {
       background: $color-primary-dark;
-      border-color: $color-primary-dark;
-      box-shadow: 0 0 0 4px rgba($color-primary, 0.2);
+      box-shadow: $shadow-md;
+      transform: translateY(-2px);
     }
   }
 
@@ -84,7 +83,7 @@ const attrs = computed(() => ({
     border-color: $color-primary-subtle;
 
     &:hover {
-      background: #DDD6FE;
+      background: #3f356c;
     }
   }
 

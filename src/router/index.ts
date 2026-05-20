@@ -35,8 +35,7 @@ const router = createRouter({
       meta: { title: 'German Flashcards' }
     }
   ],
-  scrollBehavior(_, __, savedPosition) {
-    if (savedPosition) return savedPosition
+  scrollBehavior() {
     return { top: 0 }
   }
 })

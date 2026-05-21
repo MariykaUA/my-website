@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <CustomCursor />
     <AppHeader />
     <main class="app__main">
       <RouterView />
@@ -11,6 +12,7 @@
 <script setup lang="ts">
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+import CustomCursor from '@/components/ui/CustomCursor.vue'
 </script>
 
 <style lang="scss">

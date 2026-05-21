@@ -123,7 +123,7 @@ onUnmounted(() => {
   &__card-track {
     display: flex;
     gap: 2rem;
-    padding-left: 2rem;
+    padding-left: 12rem;
     will-change: transform;
   }
 

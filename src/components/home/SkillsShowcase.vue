@@ -129,7 +129,7 @@ onUnmounted(() => {
 
   &__card {
     flex-shrink: 0;
-    background: $color-primary-light;
+    background: #C7AFFD;
     border-radius: $radius-xl;
     padding: 0;
     min-height: 40vh;
@@ -172,7 +172,7 @@ onUnmounted(() => {
 
   &__desc {
     font-size: $font-size-base;
-    color: $color-bg-alt;
+    color: #111827;
     line-height: 1.6;
     width: 100%;
   }

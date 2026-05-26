@@ -1,221 +1,304 @@
-<template>
-  <section class="st section">
-    <div class="container">
-      <div class="st__layout">
+﻿<template>
+  <!-- One extra screen lets Soft Skills fully dwell before the section unsticks -->
+  <section class="st" ref="sectionRef" :style="{ height: `${(steps.length + 1) * 100}vh` }">
 
-        <!-- Skills column -->
-        <div class="st__col reveal">
-          <p class="st__eyebrow">Expertise</p>
-          <h2 class="st__heading">Skills</h2>
-          <div class="st__skill-groups">
-            <div v-for="group in skillGroups" :key="group.category" class="st__group">
-              <h3 class="st__category">{{ group.category }}</h3>
-              <ul class="st__items">
-                <li v-for="skill in group.skills" :key="skill.name" class="st__item">
-                  <span class="st__bullet" />
-                  <span class="st__skill-name">{{ skill.name }}</span>
-                </li>
-              </ul>
-            </div>
+    <div class="st__inner">
+
+      <!-- ── LEFT: big category title ── -->
+      <div class="st__left">
+        <Transition name="title" mode="out-in">
+          <div :key="activeIndex" class="st__label">
+            <span class="st__num">{{ String(activeIndex + 1).padStart(2, '0') }}</span>
+            <h2 class="st__title" :style="{ color: steps[activeIndex].color }">
+              {{ steps[activeIndex].label }}
+            </h2>
+            <p class="st__subtitle">{{ steps[activeIndex].sub }}</p>
           </div>
-        </div>
+        </Transition>
+      </div>
 
-        <!-- Tools column -->
-        <div class="st__col reveal" style="transition-delay: 0.15s">
-          <p class="st__eyebrow">Toolkit</p>
-          <h2 class="st__heading">Tools</h2>
-          <div class="st__tools-grid">
-            <div v-for="(tool, i) in tools" :key="tool.name" class="st__tool reveal" :style="`transition-delay: ${i * 0.04}s`">
-              <img :src="tool.icon" :alt="tool.name" class="st__tool-icon" />
-              <span class="st__tool-name">{{ tool.name }}</span>
-              <span class="st__tool-cat">{{ tool.category }}</span>
+      <!-- ── RIGHT: content + progress bar ── -->
+      <div class="st__right">
+
+        <!-- Content panel -->
+        <Transition name="panel" mode="out-in">
+          <div :key="activeIndex" class="st__panel">
+
+            <!-- Tools grid -->
+            <div v-if="activeIndex === 0" class="st__tools">
+              <div v-for="tool in tools" :key="tool.name" class="st__tool">
+                <img :src="tool.icon" :alt="tool.name" class="st__tool-icon" />
+                <span class="st__tool-name">{{ tool.name }}</span>
+              </div>
             </div>
+
+            <!-- Skill tags -->
+            <div v-else class="st__tags">
+              <span
+                v-for="skill in steps[activeIndex].skills"
+                :key="skill"
+                class="st__tag"
+                :style="{
+                  background: steps[activeIndex].tagBg,
+                  borderColor: steps[activeIndex].tagBorder,
+                  color: steps[activeIndex].tagText,
+                }"
+              >{{ skill }}</span>
+            </div>
+
+          </div>
+        </Transition>
+
+        <!-- Progress bar (right edge — acts like a scroll indicator) -->
+        <div class="st__bar">
+          <div
+            class="st__bar-fill"
+            :style="{
+              height: `${barFill * 100}%`,
+              background: steps[activeIndex].color,
+            }"
+          />
+          <!-- Step dots -->
+          <div class="st__bar-dots">
+            <span
+              v-for="(step, i) in steps"
+              :key="i"
+              class="st__bar-dot"
+              :class="{ 'st__bar-dot--active': i === activeIndex }"
+              :style="i <= activeIndex ? { background: steps[activeIndex].color } : {}"
+            />
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import iconFigma from '@/assets/images/icons/figma.png'
-import iconVSCode from '@/assets/images/icons/vscode.png'
-import iconVue from '@/assets/images/icons/vue.png'
-import iconReact from '@/assets/images/icons/react.png'
-import iconClaude from '@/assets/images/icons/claude.png'
-import iconGitHub from '@/assets/images/icons/GitHub.png'
-import iconContentful from '@/assets/images/icons/contentful.png'
-import iconStorybook from '@/assets/images/icons/storybook.png'
-import iconMySQL from '@/assets/images/icons/mysql.png'
-import iconNuxt from '@/assets/images/icons/nuxt.png'
-import iconVitest from '@/assets/images/icons/vitest.png'
-import iconElementor from '@/assets/images/icons/elementor.png'
-import iconWordpress from '@/assets/images/icons/wordpress.png'
-import iconGit from '@/assets/images/icons/git.png'
-import iconFirebase from '@/assets/images/icons/firebase.png'
-import iconNetlify from '@/assets/images/icons/netlify.png'
-import iconLyssna from '@/assets/images/icons/lyssna.png'
-import iconCanva from '@/assets/images/icons/canva.png'
-import iconSketch from '@/assets/images/icons/sketch.png'
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+
+import iconFigma            from '@/assets/images/icons/figma.png'
+import iconVSCode           from '@/assets/images/icons/vscode.png'
+import iconVue              from '@/assets/images/icons/vue.png'
+import iconReact            from '@/assets/images/icons/react.png'
+import iconClaude           from '@/assets/images/icons/claude.png'
+import iconGitHub           from '@/assets/images/icons/GitHub.png'
+import iconContentful       from '@/assets/images/icons/contentful.png'
+import iconStorybook        from '@/assets/images/icons/storybook.png'
+import iconMySQL            from '@/assets/images/icons/mysql.png'
+import iconNuxt             from '@/assets/images/icons/nuxt.png'
+import iconVitest           from '@/assets/images/icons/vitest.png'
+import iconElementor        from '@/assets/images/icons/elementor.png'
+import iconWordpress        from '@/assets/images/icons/wordpress.png'
+import iconGit              from '@/assets/images/icons/git.png'
+import iconFirebase         from '@/assets/images/icons/firebase.png'
+import iconNetlify          from '@/assets/images/icons/netlify.png'
+import iconLyssna           from '@/assets/images/icons/lyssna.png'
+import iconCanva            from '@/assets/images/icons/canva.png'
+import iconSketch           from '@/assets/images/icons/sketch.png'
 import iconAdobeIllustrator from '@/assets/images/icons/adobeIllustratorr.png'
 
-useScrollAnimation()
-
-const skillGroups = [
+// ── Steps (scroll sections) ──────────────────────────────
+const steps = [
   {
-    category: 'Design',
+    label: 'Tools',
+    sub: 'What I build with',
+    color: '#7C3AED',
+    tagBg: '#EDE9FE', tagBorder: '#C4B5FD', tagText: '#5B21B6',
+    skills: [],
+  },
+  {
+    label: 'Design',
+    sub: 'How I think visually',
+    color: '#7C3AED',
+    tagBg: '#EDE9FE', tagBorder: '#C4B5FD', tagText: '#5B21B6',
     skills: [
-      { name: 'Responsive design' },
-      { name: 'User flows' },
-      { name: 'Prototyping' },
-      { name: 'Wireframing' },
-      { name: 'UX Research' },
-      { name: 'User Testing' },
-      { name: 'Typography' }, 
-      { name: 'Accessibility' }, 
-      { name: 'Color Theory' },
+      'Responsive design', 'User flows', 'Prototyping',
+      'Wireframing', 'UX Research', 'User Testing',
+      'Typography', 'Accessibility', 'Color Theory',
     ],
   },
   {
-    category: 'Frontend',
+    label: 'Frontend',
+    sub: 'How I build it',
+    color: '#7C3AED',
+    tagBg: '#EDE9FE', tagBorder: '#C4B5FD', tagText: '#5B21B6',
     skills: [
-      { name: 'JavaScript' },
-      { name: 'HTML / SCSS / TypeScript' },
-      { name: 'Component-based development' },
-      { name: 'Database usage' },
-      { name: 'Tailwind CSS' },
-      { name: 'Testing' },
-      { name: 'Accessibility improvements' },
+      'JavaScript', 'HTML / SCSS / TypeScript',
+      'Component-based development', 'Database usage',
+      'Tailwind CSS', 'Testing', 'Accessibility improvements',
     ],
   },
   {
-    category: 'Soft Skills',
+    label: 'Soft Skills',
+    sub: 'How I work with people',
+    color: '#7C3AED',
+    tagBg: '#EDE9FE', tagBorder: '#C4B5FD', tagText: '#5B21B6',
     skills: [
-      { name: 'Empathy & Teamwork' },
-      { name: 'Problem solving' },
-      { name: 'Attention to detail' },
-      { name: 'Time management' },
+      'Empathy & Teamwork', 'Problem solving',
+      'Attention to detail', 'Time management',
     ],
   },
 ]
 
 const tools = [
-  { icon: iconFigma, name: 'Figma', category: 'Design' },
-  { icon: iconVSCode, name: 'VS Code', category: 'Dev' },
-  { icon: iconVue, name: 'Vue.js', category: 'Dev' },
-  { icon: iconReact, name: 'React.js', category: 'Dev' },
-  { icon: iconClaude, name: 'Claude', category: 'AI' },
-  { icon: iconGitHub, name: 'GitHub', category: 'Dev' },
-  { icon: iconContentful, name: 'Contentful', category: 'Dev' },
-  { icon: iconStorybook, name: 'Storybook', category: 'Dev' },
-  { icon: iconMySQL, name: 'MySQL', category: 'Dev' },
-  { icon: iconNuxt, name: 'Nuxt', category: 'Dev' },
-  { icon: iconVitest, name: 'Vitest', category: 'Dev' },
-  { icon: iconElementor, name: 'Elementor', category: 'Dev' },
-  { icon: iconWordpress, name: 'Wordpress', category: 'Dev' },
-  { icon: iconGit, name: 'Git', category: 'Dev' },
-  { icon: iconFirebase, name: 'Firebase', category: 'Dev' },
-  { icon: iconNetlify, name: 'Netlify', category: 'Deploy' },
-  { icon: iconLyssna, name: 'Lyssna', category: 'Research' },
-  { icon: iconCanva, name: 'Canva', category: 'Design' },
-  { icon: iconSketch, name: 'Sketch', category: 'Design' },
-  { icon: iconAdobeIllustrator, name: 'Adobe Illustrator', category: 'Design' },
+  { name: 'Figma',             icon: iconFigma            },
+  { name: 'VS Code',           icon: iconVSCode           },
+  { name: 'Vue.js',            icon: iconVue              },
+  { name: 'React.js',          icon: iconReact            },
+  { name: 'Claude',            icon: iconClaude           },
+  { name: 'GitHub',            icon: iconGitHub           },
+  { name: 'Contentful',        icon: iconContentful       },
+  { name: 'Storybook',         icon: iconStorybook        },
+  { name: 'MySQL',             icon: iconMySQL            },
+  { name: 'Nuxt',              icon: iconNuxt             },
+  { name: 'Vitest',            icon: iconVitest           },
+  { name: 'Elementor',         icon: iconElementor        },
+  { name: 'WordPress',         icon: iconWordpress        },
+  { name: 'Git',               icon: iconGit              },
+  { name: 'Firebase',          icon: iconFirebase         },
+  { name: 'Netlify',           icon: iconNetlify          },
+  { name: 'Lyssna',            icon: iconLyssna           },
+  { name: 'Canva',             icon: iconCanva            },
+  { name: 'Sketch',            icon: iconSketch           },
+  { name: 'Adobe Illustrator', icon: iconAdobeIllustrator },
 ]
+
+// ── Scroll tracking ──────────────────────────────────────
+const sectionRef = ref(null)
+const activeIndex = ref(0)
+const progress = ref(0) // 0–1 within the current step
+
+// barFill = overall progress from 0 to 1 across all steps
+const barFill = computed(() => {
+  return (activeIndex.value + progress.value) / steps.length
+})
+
+function onScroll() {
+  if (!sectionRef.value) return
+  const rect = sectionRef.value.getBoundingClientRect()
+  const scrolled = -rect.top                                       // px scrolled into the section
+  const total    = steps.length * window.innerHeight               // +1 screen so last step dwells
+  const clamped  = Math.max(0, Math.min(total, scrolled))
+
+  activeIndex.value = Math.min(
+    steps.length - 1,
+    Math.floor(clamped / window.innerHeight),
+  )
+  progress.value = (clamped % window.innerHeight) / window.innerHeight
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <style scoped lang="scss">
-.st {
-  background: $color-bg-alt;
+// ── Transitions ──────────────────────────────────────────
+.title-enter-active,
+.title-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.title-enter-from { opacity: 0; transform: translateY(24px); }
+.title-leave-to   { opacity: 0; transform: translateY(-24px); }
 
-  &__layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $space-16;
+.panel-enter-active,
+.panel-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.panel-enter-from { opacity: 0; transform: translateX(20px); }
+.panel-leave-to   { opacity: 0; transform: translateX(-20px); }
+
+// ── Layout ───────────────────────────────────────────────
+.st {
+  position: relative;
+
+  // The sticky container fills exactly one screen
+  &__inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background: #C7AFFD;
+  }
+
+  // ── Left panel ───────────────────────────────────────
+  &__left {
+    width: 38%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-16 $space-8 $space-16 $space-12;
+    background: $color-bg;
+    border-right: 1px solid $color-border;
+    position: relative;
 
     @include respond-to(lg) {
-      grid-template-columns: 1fr 1fr;
-      gap: $space-20;
+      padding: $space-16 $space-12 $space-16 $space-16;
     }
   }
 
-  &__col {
-    display: flex;
-    flex-direction: column;
+  &__label {
+    width: 100%;
   }
 
-  &__eyebrow {
+  &__num {
+    display: block;
     font-size: $font-size-sm;
-    font-weight: 600;
-    color: $color-primary;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: $space-2;
-  }
-
-  &__heading {
-    font-size: $font-size-3xl;
-    margin-bottom: $space-10;
-  }
-
-  // ── Skills ──────────────────────────────────────────
-  &__skill-groups {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $space-5;
-  }
-
-  &__group {
-    background: $color-white;
-    border: 1px solid $color-border;
-    border-radius: $radius-xl;
-    padding: $space-6;
-  }
-
-  &__category {
-    font-size: $font-size-xs;
     font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: $color-primary;
-    margin-bottom: $space-5;
+    color: $color-text-muted;
+    margin-bottom: $space-4;
   }
 
-  &__items {
-    display: flex;
-    flex-direction: column;
-    gap: $space-4;
-    list-style: none;
-    padding: 0;
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0 0 $space-4 0;
+    transition: color 0.4s ease;
+  }
+
+  &__subtitle {
+    font-size: $font-size-base;
+    color: $color-text-muted;
     margin: 0;
+    line-height: 1.5;
   }
 
-  &__item {
+  // ── Right panel ──────────────────────────────────────
+  &__right {
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: $space-3;
+    position: relative;
+    overflow: hidden;
+    padding: $space-12 $space-16 $space-12 $space-12;
+
+    @include respond-to(lg) {
+      padding: $space-16 $space-20 $space-16 $space-16;
+    }
   }
 
-  &__bullet {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: $color-primary;
-    flex-shrink: 0;
+  &__panel {
+    width: 100%;        // fill available width
+    overflow: visible;  // but don't stretch to full height — parent align-items:center handles it
   }
 
-  &__skill-name { font-size: $font-size-sm; font-weight: 500; }
-
-  // ── Tools ───────────────────────────────────────────
-  &__tools-grid {
+  // ── Tools grid ───────────────────────────────────────
+  &__tools {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: $space-3;
 
-    @include respond-to(sm) { grid-template-columns: repeat(4, 1fr); }
-    @include respond-to(lg) { grid-template-columns: repeat(3, 1fr); }
-    @include respond-to(xl) { grid-template-columns: repeat(4, 1fr); }
+    @include respond-to(md) {
+      grid-template-columns: repeat(5, 1fr);
+    }
   }
 
   &__tool {
@@ -223,12 +306,17 @@ const tools = [
     flex-direction: column;
     align-items: center;
     gap: $space-2;
-    padding: $space-5 $space-3;
-    background: $color-white;
+    padding: $space-4 $space-2;
+    background: $color-bg;
     border: 1px solid $color-border;
     border-radius: $radius-xl;
-    text-align: center;
-    transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+    transition: box-shadow $transition-base, transform $transition-base, border-color $transition-base;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      transform: translateY(-3px);
+      border-color: $color-border-violet;
+    }
   }
 
   &__tool-icon {
@@ -236,7 +324,118 @@ const tools = [
     height: 2rem;
     object-fit: contain;
   }
-  &__tool-name  { font-size: $font-size-sm; font-weight: 600; }
-  &__tool-cat   { font-size: $font-size-xs; color: $color-text-muted; }
+
+  &__tool-name {
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $color-text-muted;
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  // ── Skill tags ───────────────────────────────────────
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+    align-content: center;
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: $space-2 $space-5;
+    border-radius: $radius-full;
+    border: 1px solid transparent;
+    font-size: $font-size-base;
+    font-weight: 500;
+    line-height: 1.6;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  // ── Progress bar (right edge) ────────────────────────
+  &__bar {
+    position: absolute;
+    right: $space-6;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 180px;
+    background: $color-border;
+    border-radius: $radius-full;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: $radius-full;
+    transition: height 0.1s linear, background 0.4s ease;
+  }
+
+  &__bar-dots {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  &__bar-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $color-border;
+    border: 2px solid $color-bg;
+    transition: background 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+
+    &--active {
+      transform: scale(1.4);
+    }
+  }
+
+  // ── Mobile: stacked layout (no sticky) ──────────────
+  @media (max-width: #{$bp-md - 1px}) {
+    height: auto !important;
+
+    &__inner {
+      position: static;
+      height: auto;
+      flex-direction: column;
+    }
+
+    &__left {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid $color-border;
+      padding: $space-10 $space-6;
+      justify-content: flex-start;
+    }
+
+    &__right {
+      padding: $space-8 $space-6 $space-12;
+      align-items: flex-start;
+    }
+
+    &__bar { display: none; }
+
+    // On mobile show all sections stacked
+    &__panel { display: block; }
+  }
 }
 </style>

@@ -79,26 +79,26 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-import iconFigma            from '@/assets/images/icons/figma.png'
-import iconVSCode           from '@/assets/images/icons/vscode.png'
-import iconVue              from '@/assets/images/icons/vue.png'
-import iconReact            from '@/assets/images/icons/react.png'
-import iconClaude           from '@/assets/images/icons/claude.png'
-import iconGitHub           from '@/assets/images/icons/GitHub.png'
-import iconContentful       from '@/assets/images/icons/contentful.png'
-import iconStorybook        from '@/assets/images/icons/storybook.png'
-import iconMySQL            from '@/assets/images/icons/mysql.png'
-import iconNuxt             from '@/assets/images/icons/nuxt.png'
-import iconVitest           from '@/assets/images/icons/vitest.png'
-import iconElementor        from '@/assets/images/icons/elementor.png'
-import iconWordpress        from '@/assets/images/icons/wordpress.png'
-import iconGit              from '@/assets/images/icons/git.png'
-import iconFirebase         from '@/assets/images/icons/firebase.png'
-import iconNetlify          from '@/assets/images/icons/netlify.png'
+import iconFigma            from '@/assets/images/icons/figma.svg'
+import iconVSCode           from '@/assets/images/icons/Visual_Studio_Code.svg'
+import iconVue              from '@/assets/images/icons/Vue.svg'
+import iconReact            from '@/assets/images/icons/React.svg'
+import iconClaude           from '@/assets/images/icons/Claude.svg'
+import iconGitHub           from '@/assets/images/icons/github.svg'
+import iconContentful       from '@/assets/images/icons/Contentful.svg'
+import iconStorybook        from '@/assets/images/icons/storybook.svg'
+import iconMySQL            from '@/assets/images/icons/MySQL.svg'
+import iconNuxt             from '@/assets/images/icons/Nuxt.svg'
+import iconVitest           from '@/assets/images/icons/vitest.svg'
+import iconElementor        from '@/assets/images/icons/elementor.svg'
+import iconWordpress        from '@/assets/images/icons/WordPress.svg'
+import iconGit              from '@/assets/images/icons/Git.svg'
+import iconFirebase         from '@/assets/images/icons/Firebase.svg'
+import iconNetlify          from '@/assets/images/icons/Netlify.svg'
 import iconLyssna           from '@/assets/images/icons/lyssna.png'
-import iconCanva            from '@/assets/images/icons/canva.png'
-import iconSketch           from '@/assets/images/icons/sketch.png'
-import iconAdobeIllustrator from '@/assets/images/icons/adobeIllustratorr.png'
+import iconCanva            from '@/assets/images/icons/Canva.svg'
+import iconSketch           from '@/assets/images/icons/Sketch.svg'
+import iconAdobeIllustrator from '@/assets/images/icons/Adobe_Illustrator.svg'
 
 // ── Steps (scroll sections) ──────────────────────────────
 const steps = [
@@ -279,6 +279,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     position: relative;
     overflow: hidden;
     padding: $space-12 $space-16 $space-12 $space-12;
+    background: #C7AFFD;
 
     @include respond-to(lg) {
       padding: $space-16 $space-20 $space-16 $space-16;
@@ -305,30 +306,25 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $space-2;
-    padding: $space-4 $space-2;
-    background: $color-bg;
-    border: 1px solid $color-border;
-    border-radius: $radius-xl;
-    transition: box-shadow $transition-base, transform $transition-base, border-color $transition-base;
+    gap: $space-3;
+    padding: $space-4 $space-3;
+    transition: transform $transition-base;
 
     &:hover {
-      box-shadow: $shadow-md;
-      transform: translateY(-3px);
-      border-color: $color-border-violet;
+      transform: translateY(-4px);
     }
   }
 
   &__tool-icon {
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     object-fit: contain;
   }
 
   &__tool-name {
-    font-size: $font-size-xs;
+    font-size: $font-size-base;
     font-weight: 500;
-    color: $color-text-muted;
+    color: $color-text;
     text-align: center;
     line-height: 1.2;
     word-break: break-word;

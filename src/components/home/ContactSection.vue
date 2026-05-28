@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 import iconEmail from '@/assets/images/icons/Email.png'
-import iconGitHub from '@/assets/images/icons/GitHub.png'
+import iconGitHub from '@/assets/images/icons/github.svg'
 import iconLinkedin from '@/assets/images/icons/linkedin.png'
 
 useScrollAnimation()

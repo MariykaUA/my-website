@@ -163,7 +163,7 @@ const tools = [
   { name: 'Lyssna',            icon: iconLyssna           },
   { name: 'Canva',             icon: iconCanva            },
   { name: 'Sketch',            icon: iconSketch           },
-  { name: 'Adobe Illustrator', icon: iconAdobeIllustrator },
+  { name: 'Illustrator', icon: iconAdobeIllustrator },
 ]
 
 // ── Scroll tracking ──────────────────────────────────────
@@ -276,6 +276,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     padding: $space-12 $space-16 $space-12 $space-12;
@@ -287,8 +288,8 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   }
 
   &__panel {
-    width: 100%;        // fill available width
-    overflow: visible;  // but don't stretch to full height — parent align-items:center handles it
+    width: 100%;
+    overflow: visible;
   }
 
   // ── Tools grid ───────────────────────────────────────
@@ -308,10 +309,13 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     align-items: center;
     gap: $space-3;
     padding: $space-4 $space-3;
-    transition: transform $transition-base;
+    background: $color-white;
+    border-radius: $radius-lg;
+    transition: transform $transition-base, box-shadow $transition-base;
 
     &:hover {
       transform: translateY(-4px);
+      box-shadow: $shadow-md;
     }
   }
 

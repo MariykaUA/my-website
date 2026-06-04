@@ -40,6 +40,7 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation'
 import runImg from '@/assets/images/illustrations/run.png'
 import travelImg from '@/assets/images/illustrations/travel.png'
 import readImg from '@/assets/images/illustrations/read.png'
+import learnImg from '@/assets/images/illustrations/learn.png'
 
 useScrollAnimation()
 
@@ -55,7 +56,7 @@ const items = [
     description: 'Exploring new countries, getting lost in new cities, and collecting passport stamps.',
   },
   {
-    emoji: '🌍',
+    image: learnImg,
     title: 'Learning Languages',
     description: 'A way to connect with people and cultures around the world.',
   },

@@ -36,7 +36,7 @@ const menuOpen = ref(false)
 
 const navLinks: NavLink[] = [
   { label: 'Home',       to: '/',           exact: true },
-  //{ label: 'About',      to: '/about' },
+  { label: 'About',      to: '/about' },
   //{ label: 'Blog',       to: '/blog' },
   //{ label: 'Flashcards', to: '/flashcards' }
 ]
@@ -95,7 +95,7 @@ const navLinks: NavLink[] = [
   &__link {
     font-size: $font-size-sm;
     font-weight: 500;
-    color: $color-text-muted;
+    color: $color-primary;
     transition: color $transition-fast;
     position: relative;
     padding-bottom: 2px;

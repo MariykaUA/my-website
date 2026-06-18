@@ -73,7 +73,6 @@ import catGif from '@/assets/images/Cat animation.gif'
 
   &__subtitle {
     font-size: $font-size-lg;
-    color: $color-text-muted;
     width: 450px;
     margin-bottom: 12px;
   }

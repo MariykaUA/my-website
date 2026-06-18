@@ -62,7 +62,6 @@ useScrollAnimation()
 
   &__sub {
     font-size: $font-size-lg;
-    color: $color-text-muted;
     margin-bottom: $space-12;
     line-height: 1.6;
   }

@@ -1,22 +1,45 @@
 <template>
   <section class="story section">
     <div class="container">
-      <div class="story__grid">
-        <div class="story__image reveal">
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="Working on design" />
+
+      <div class="story__header reveal">
+        <p class="story__eyebrow">My story</p>
+        <h1 class="story__title">Designer who codes.<br>Developer who designs.</h1>
+      </div>
+
+      <div class="story__row reveal">
+        <div class="story__image">
+          <img src="@/assets/me/me1.JPG" alt="Mariia" />
         </div>
-        <div class="story__text reveal" style="transition-delay: 0.15s">
-          <p class="story__eyebrow">My story</p>
-          <h1 class="story__title">Designer who codes.<br>Developer who designs.</h1>
-          <p>I started out studying graphic design, but quickly found myself frustrated by the gap between a beautiful mockup and what actually ended up in the browser. So I learned to code — and I haven't looked back.</p>
-          <p>Today I work across the full product design cycle: user research, wireframing, visual design, and implementation. I believe the best work happens when you understand both sides of the conversation.</p>
-          <p>I'm originally from Eastern Europe, currently based in Berlin, and frequently somewhere else entirely with a carry-on bag and too many camera lenses.</p>
+        <div class="story__text">
+          <p class="story__para">My journey started with UX/UI design, but over time I found myself wanting to understand what happens after the design is handed over. That curiosity led me to work more closely with developers and learn the basics of front-end technologies.</p>
+        </div>
+      </div>
+
+      <div class="story__row story__row--reverse reveal">
+        <div class="story__image">
+          <img src="@/assets/me/me2.JPG" alt="Mariia" />
+        </div>
+        <div class="story__text">
+          <p class="story__para">What excites me most is creating digital experiences that feel intuitive, useful, and enjoyable for real people. Whether I’m conducting research, analysing competitors, building wireframes, designing interfaces in Figma, or collaborating with engineers, I enjoy being involved throughout the process and seeing ideas turn into products.</p>
+        </div>
+      </div>
+
+      <div class="story__row reveal">
+        <div class="story__image">
+          <img src="@/assets/me/me3.JPG" alt="Mariia" />
+        </div>
+        <div class="story__text">
+          <p class="story__para">I am also passionate about continuous learning. As AI becomes an increasingly important part of our industry, I actively explore new tools and workflows to improve productivity and discover better ways of working. I enjoy experimenting, learning, and staying curious about new technologies.</p>
           <div class="story__actions">
-            <BaseButton href="mailto:hello@example.com">Get in touch</BaseButton>
-            <BaseButton variant="outline" href="/cv.pdf" target="_blank">Download CV</BaseButton>
+            <BaseButton href="https://www.linkedin.com/in/mariiahoienko1999/">Get in touch</BaseButton>
+            <BaseButton variant="ghost" to="/">Go back</BaseButton>
           </div>
         </div>
       </div>
+
+      <p class="story__quote reveal">"For me, great design is not only about solving problems — it is about understanding people, asking the right questions, and creating experiences that make a meaningful difference."</p>
+
     </div>
   </section>
 </template>
@@ -29,26 +52,59 @@ useScrollAnimation()
 
 <style scoped lang="scss">
 .story {
-  &__grid {
+  &__header {
+    text-align: center;
+    margin-bottom: $space-12;
+  }
+
+  &__row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-12;
-    align-items: center;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 0;
+    border-top: 2.5px solid $color-primary;
+    border-bottom: 2.5px solid $color-primary;
+    border-radius: 0;
+    overflow: hidden;
 
-    @include respond-to(lg) { grid-template-columns: 5fr 7fr; }
+    & + & { border-top: none; }
+
+    @include respond-to(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    > * {
+      min-width: 0;
+    }
+
+    &--reverse {
+      @include respond-to(lg) {
+        direction: rtl;
+
+        > * { direction: ltr; }
+
+      }
+    }
   }
 
   &__image {
-    border-radius: $radius-xl;
     overflow: hidden;
-    box-shadow: $shadow-xl;
-    aspect-ratio: 4/5;
+    height: 100%;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $space-10;
   }
 
   &__eyebrow {
@@ -62,7 +118,23 @@ useScrollAnimation()
 
   &__title {
     font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: $space-6;
+    margin-bottom: 0;
+  }
+
+  &__quote {
+    text-align: center;
+    max-width: 760px;
+    margin: $space-12 auto 0;
+    font-size: $font-size-xl;
+    font-style: italic;
+    color: $color-primary;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  &__para {
+    margin-bottom: $space-5;
+    line-height: 1.7;
   }
 
   &__actions {

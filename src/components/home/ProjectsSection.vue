@@ -6,6 +6,26 @@
         <h2 class="section-title">My Projects</h2>
       </div>
 
+      <div class="projects__more reveal">
+        <p class="projects__more-subtitle">A couple of small side projects I built for myself.</p>
+        <div class="projects__links">
+          <a
+            v-for="link in liveLinks"
+            :key="link.url"
+            :href="link.url"
+            target="_blank"
+            rel="noopener"
+            class="projects__link-item"
+          >
+            <span class="projects__link-text">
+              <span class="projects__link-title">{{ link.title }}</span>
+              <span class="projects__link-desc">{{ link.description }}</span>
+            </span>
+            <span class="projects__link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
       <div class="projects__filters reveal">
         <button
           v-for="f in filters"
@@ -299,6 +319,19 @@ const projects = [
   },
 ]
 
+const liveLinks = [
+  {
+    title: 'Wishlist',
+    description: 'My personal wishlist.',
+    url: 'https://wishlist-bay-eta.vercel.app/',
+  },
+  {
+    title: 'Places to go',
+    description: 'Cafes to check out in Basel.',
+    url: 'https://places-to-go-sigma.vercel.app/',
+  },
+]
+
 const filteredProjects = computed(() =>
   activeFilter.value === 'All'
     ? projects
@@ -476,6 +509,77 @@ function closeModal() {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  &__more {
+    margin-top: -$space-4;
+    margin-bottom: $space-12;
+    padding-bottom: $space-8;
+    border-bottom: 1px solid $color-border;
+    text-align: center;
+  }
+
+  &__more-subtitle {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    max-width: 480px;
+    margin: 0 auto $space-5;
+    line-height: 1.6;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-8;
+    margin: 0 auto;
+  }
+
+  &__link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    width: 400px;
+    padding: $space-3 $space-5;
+    border: 1px solid transparent;
+    border-radius: $radius-xl;
+    background: #C7AFFD;
+    text-decoration: none;
+    text-align: left;
+    transition: background $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      background: #B89BFC;
+      box-shadow: $shadow-sm;
+      transform: translateY(-2px);
+
+      .projects__link-arrow { transform: translate(2px, -2px); }
+    }
+  }
+
+  &__link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__link-title {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  &__link-desc {
+    font-size: $font-size-sm;
+    color: #111827;
+  }
+
+  &__link-arrow {
+    flex-shrink: 0;
+    font-size: $font-size-3xl;
+    color: #111827;
+    transition: color $transition-fast, transform $transition-fast;
   }
 }
 

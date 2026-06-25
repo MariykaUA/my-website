@@ -374,17 +374,18 @@ function closeModal() {
   &__filter-btn {
     padding: $space-2 $space-5;
     border-radius: $radius-full;
-    border: 1.5px solid $color-border;
+    border: 1.5px solid $color-primary-light;
     background: $color-white;
-    color: $color-text-muted;
+    color: $color-primary;
     font-size: $font-size-sm;
     font-weight: 600;
     cursor: pointer;
     transition: border-color $transition-fast, background $transition-fast, color $transition-fast, transform $transition-fast;
 
     &:hover {
-      border-color: $color-primary-light;
-      color: $color-primary;
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $color-white;
       transform: translateY(-1px);
     }
 
@@ -521,7 +522,7 @@ function closeModal() {
 
   &__more-subtitle {
     font-size: $font-size-sm;
-    color: $color-text-muted;
+    color: $color-text-black;
     max-width: 480px;
     margin: 0 auto $space-5;
     line-height: 1.6;
@@ -567,7 +568,7 @@ function closeModal() {
   &__link-title {
     font-size: $font-size-base;
     font-weight: 600;
-    color: $color-text;
+    color: $color-text-black;
   }
 
   &__link-desc {

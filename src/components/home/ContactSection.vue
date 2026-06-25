@@ -84,14 +84,14 @@ useScrollAnimation()
     gap: $space-2;
     flex: 1;
     padding: $space-4 $space-4;
-    background: $color-white;
-    border: 1px solid $color-border-violet;
+    background: #C7AFFD;
+    border: 1px solid transparent;
     border-radius: $radius-xl;
     text-decoration: none;
-    transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+    transition: background $transition-fast, box-shadow $transition-fast, transform $transition-fast;
 
     &:hover {
-      border-color: $color-primary-light;
+      background: #B89BFC;
       box-shadow: $shadow-md;
       transform: translateY(-2px);
     }
@@ -106,7 +106,7 @@ useScrollAnimation()
   &__label {
     font-size: $font-size-base;
     font-weight: 600;
-    color: $color-primary;
+    color: $color-text-black;
   }
 }
 </style>

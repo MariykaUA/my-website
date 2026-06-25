@@ -338,6 +338,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   &__tags {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: $space-3;
     align-content: center;
   }

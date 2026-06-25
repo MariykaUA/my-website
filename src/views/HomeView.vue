@@ -4,7 +4,7 @@
     <ProjectsSection />
     <SkillsToolsSection />
     <IntroSection />
-    <SkillsShowcase />
+    <BeyondScreen />
     <ContactSection />
   </div>
 </template>
@@ -14,6 +14,6 @@ import HeroSection from '@/components/home/HeroSection.vue'
 import ProjectsSection from '@/components/home/ProjectsSection.vue'
 import SkillsToolsSection from '@/components/home/SkillsToolsSection.vue'
 import IntroSection from '@/components/home/IntroSection.vue'
-import SkillsShowcase from '@/components/home/SkillsShowcase.vue'
+import BeyondScreen from '@/components/home/BeyondScreen.vue'
 import ContactSection from '@/components/home/ContactSection.vue'
 </script>

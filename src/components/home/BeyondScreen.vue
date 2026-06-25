@@ -3,8 +3,8 @@
     <div class="beyond__sticky">
       <div class="container">
         <div class="section-header reveal">
-          <h2 class="section-title">Beyond the screen</h2>
-          <p class="section-subtitle">Being inspired outside of work</p>
+          <p class="beyond__eyebrow">Beyond the screen</p>
+          <h2 class="section-title">Being inspired outside of work</h2>
         </div>
 
         <div class="beyond__card-wrapper" ref="wrapperRef">
@@ -169,6 +169,15 @@ onUnmounted(() => {
   &__title {
     font-size: $font-size-4xl;
     margin-bottom: $space-5;
+  }
+
+  &__eyebrow {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $eyebrow-violet;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: $space-4;
   }
 
   &__desc {

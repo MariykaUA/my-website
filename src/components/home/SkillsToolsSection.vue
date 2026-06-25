@@ -251,7 +251,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: $color-text-muted;
+    color: $color-text-black;
     margin-bottom: $space-4;
   }
 
@@ -266,7 +266,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
   &__subtitle {
     font-size: $font-size-base;
-    color: $color-text-muted;
+    color: $color-text-black;
     margin: 0;
     line-height: 1.5;
   }
@@ -328,7 +328,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   &__tool-name {
     font-size: $font-size-base;
     font-weight: 500;
-    color: $color-text;
+    color: $color-text-black;
     text-align: center;
     line-height: 1.2;
     word-break: break-word;

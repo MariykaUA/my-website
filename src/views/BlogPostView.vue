@@ -139,13 +139,13 @@ const renderedContent = computed(() => {
       font-size: $font-size-2xl;
       margin-top: $space-10;
       margin-bottom: $space-4;
-      color: $color-text;
+      color: $color-text-black;
     }
 
     :deep(p) {
       font-size: $font-size-lg;
       line-height: 1.8;
-      color: $color-text;
+      color: $color-text-black;
       margin-bottom: $space-6;
     }
 

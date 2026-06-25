@@ -100,7 +100,7 @@ const countryFlag = computed(() => {
     font-size: $font-size-xl;
     font-family: $font-display;
     line-height: 1.3;
-    color: $color-text;
+    color: $color-text-black;
   }
 
   &__excerpt {

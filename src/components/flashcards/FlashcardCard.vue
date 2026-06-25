@@ -110,7 +110,7 @@ const difficultyColor = computed((): 'green' | 'primary' | 'gray' => {
   font-family: $font-display;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
-  color: $color-text;
+  color: $color-text-black;
   margin: 0;
   line-height: 1.2;
 }

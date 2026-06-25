@@ -2,7 +2,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-display;
   font-weight: 700;
   line-height: 1.2;
-  color: $color-text;
+  color: $color-text-black;
 }
 
 h1 { font-size: $font-size-4xl; @include respond-to(md) { font-size: $font-size-5xl; } }
@@ -12,7 +12,7 @@ h4 { font-size: $font-size-xl; }
 h5 { font-size: $font-size-lg; }
 h6 { font-size: $font-size-base; }
 
-p { margin-bottom: $space-4; line-height: 1.7; color: $color-text; }
+p { margin-bottom: $space-4; line-height: 1.7; color: $color-text-black; }
 p:last-child { margin-bottom: 0; }
 
 .text-gradient {

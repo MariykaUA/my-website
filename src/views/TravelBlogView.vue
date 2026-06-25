@@ -34,7 +34,7 @@ const store = useBlogStore()
   &__eyebrow {
     font-size: $font-size-sm;
     font-weight: 600;
-    color: $color-primary;
+    color: $eyebrow-violet;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: $space-4;

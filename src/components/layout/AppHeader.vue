@@ -79,7 +79,7 @@ const navLinks: NavLink[] = [
   }
 
   &__logo-text {
-    color: $color-text;
+    color: $color-text-black;
   }
 
   &__nav {
@@ -131,7 +131,7 @@ const navLinks: NavLink[] = [
       display: block;
       width: 24px;
       height: 2px;
-      background: $color-text;
+      background: $color-text-black;
       border-radius: $radius-full;
       transition: transform $transition-fast, opacity $transition-fast;
     }

@@ -3,6 +3,14 @@
     <div class="hero__inner container">
       <div class="hero__content">
         <p class="hero__eyebrow animate-fade-in-up">UX/UI Designer & Frontend Developer</p>
+
+        <!-- Mobile/tablet only: image sits right below the eyebrow -->
+        <div class="hero__visual hero__visual--mobile animate-fade-in">
+          <div class="hero__illustration">
+            <img :src="meIllustration" alt="Maria illustration" />
+          </div>
+        </div>
+
         <h1 class="hero__title animate-fade-in-up" style="animation-delay: 0.1s">
           Crafting digital<br>
           <span class="text-gradient">experiences</span><br>
@@ -16,7 +24,8 @@
         </div>
       </div>
 
-      <div class="hero__visual animate-fade-in" style="animation-delay: 0.4s">
+      <!-- Desktop only: image sits beside the content -->
+      <div class="hero__visual hero__visual--desktop animate-fade-in" style="animation-delay: 0.4s">
         <div class="hero__illustration">
           <img :src="meIllustration" alt="Maria illustration" />
         </div>
@@ -42,16 +51,25 @@ import catGif from '@/assets/images/Cat animation.gif'
   position: relative;
   overflow: hidden;
 
+  @media (max-width: #{$bp-lg - 1px}) {
+    min-height: auto;
+  }
+
+  &__content {
+    @media (max-width: #{$bp-lg - 1px}) { text-align: center; }
+  }
+
   &__inner {
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-12;
-    padding-block: $space-6;
+    padding-block: $space-3;
     align-items: center;
     position: relative;
     z-index: 1;
 
     @include respond-to(lg) {
+      padding-block: $space-6;
       grid-template-columns: 1fr 1fr;
     }
   }
@@ -73,8 +91,11 @@ import catGif from '@/assets/images/Cat animation.gif'
 
   &__subtitle {
     font-size: $font-size-lg;
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
     margin-bottom: 12px;
+
+    @media (max-width: #{$bp-lg - 1px}) { margin-inline: auto; }
   }
 
   &__actions {
@@ -83,6 +104,11 @@ import catGif from '@/assets/images/Cat animation.gif'
     align-items: center;
     gap: $space-4;
     margin-top: $space-6;
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      justify-content: center;
+      margin-top: $space-3;
+    }
   }
 
   &__cat {
@@ -97,13 +123,32 @@ import catGif from '@/assets/images/Cat animation.gif'
     justify-content: center;
   }
 
+  &__visual--mobile {
+    margin-block: $space-3;
+
+    @include respond-to(lg) { display: none; }
+  }
+
+  &__visual--desktop {
+    display: none;
+
+    @include respond-to(lg) { display: flex; }
+  }
+
 &__illustration {
     position: relative;
     z-index: 1;
-    width: 340px;
-    margin-left: $space-12;
+    width: 220px;
+    margin-left: 0;
 
-    @include respond-to(md) {
+    @include respond-to(sm) { width: 260px; }
+
+    @include respond-to(lg) {
+      width: 340px;
+      margin-left: $space-12;
+    }
+
+    @include respond-to(xl) {
       width: 400px;
       margin-left: $space-16;
     }

@@ -4,28 +4,89 @@
 
     <div class="st__inner">
 
-      <!-- ── LEFT: big category title ── -->
-      <div class="st__left">
-        <Transition name="title" mode="out-in">
-          <div :key="activeIndex" class="st__label">
-            <span class="st__num">{{ String(activeIndex + 1).padStart(2, '0') }}</span>
-            <h2 class="st__title" :style="{ color: steps[activeIndex].color }">
-              {{ steps[activeIndex].label }}
-            </h2>
-            <p class="st__subtitle">{{ steps[activeIndex].sub }}</p>
+      <!-- Desktop: scroll-jacked tab switcher -->
+      <template v-if="isDesktop">
+        <!-- ── LEFT: big category title ── -->
+        <div class="st__left">
+          <Transition name="title" mode="out-in">
+            <div :key="activeIndex" class="st__label">
+              <span class="st__num">{{ String(activeIndex + 1).padStart(2, '0') }}</span>
+              <h2 class="st__title" :style="{ color: steps[activeIndex].color }">
+                {{ steps[activeIndex].label }}
+              </h2>
+              <p class="st__subtitle">{{ steps[activeIndex].sub }}</p>
+            </div>
+          </Transition>
+        </div>
+
+        <!-- ── RIGHT: content + progress bar ── -->
+        <div class="st__right">
+
+          <!-- Content panel -->
+          <Transition name="panel" mode="out-in">
+            <div :key="activeIndex" class="st__panel">
+
+              <!-- Tools grid -->
+              <div v-if="activeIndex === 0" class="st__tools">
+                <div v-for="tool in tools" :key="tool.name" class="st__tool">
+                  <img :src="tool.icon" :alt="tool.name" class="st__tool-icon" />
+                  <span class="st__tool-name">{{ tool.name }}</span>
+                </div>
+              </div>
+
+              <!-- Skill tags -->
+              <div v-else class="st__tags">
+                <span
+                  v-for="skill in steps[activeIndex].skills"
+                  :key="skill"
+                  class="st__tag"
+                  :style="{
+                    background: steps[activeIndex].tagBg,
+                    borderColor: steps[activeIndex].tagBorder,
+                    color: steps[activeIndex].tagText,
+                  }"
+                >{{ skill }}</span>
+              </div>
+
+            </div>
+          </Transition>
+
+          <!-- Progress bar (right edge — acts like a scroll indicator) -->
+          <div class="st__bar">
+            <div
+              class="st__bar-fill"
+              :style="{
+                height: `${barFill * 100}%`,
+                background: steps[activeIndex].color,
+              }"
+            />
+            <!-- Step dots -->
+            <div class="st__bar-dots">
+              <span
+                v-for="(step, i) in steps"
+                :key="i"
+                class="st__bar-dot"
+                :class="{ 'st__bar-dot--active': i === activeIndex }"
+                :style="i <= activeIndex ? { background: steps[activeIndex].color } : {}"
+              />
+            </div>
           </div>
-        </Transition>
-      </div>
 
-      <!-- ── RIGHT: content + progress bar ── -->
-      <div class="st__right">
+        </div>
+      </template>
 
-        <!-- Content panel -->
-        <Transition name="panel" mode="out-in">
-          <div :key="activeIndex" class="st__panel">
+      <!-- Mobile / tablet: everything stacked, plain scroll -->
+      <div v-else class="st__mobile-list">
+        <div v-for="(step, i) in steps" :key="step.label" class="st__mobile-block">
+          <div class="st__label">
+            <span class="st__num">{{ String(i + 1).padStart(2, '0') }}</span>
+            <h2 class="st__title" :style="{ color: step.color }">{{ step.label }}</h2>
+            <p class="st__subtitle">{{ step.sub }}</p>
+          </div>
 
+          <div class="st__panel">
             <!-- Tools grid -->
-            <div v-if="activeIndex === 0" class="st__tools">
+            <div v-if="i === 0" class="st__tools">
               <div v-for="tool in tools" :key="tool.name" class="st__tool">
                 <img :src="tool.icon" :alt="tool.name" class="st__tool-icon" />
                 <span class="st__tool-name">{{ tool.name }}</span>
@@ -35,41 +96,14 @@
             <!-- Skill tags -->
             <div v-else class="st__tags">
               <span
-                v-for="skill in steps[activeIndex].skills"
+                v-for="skill in step.skills"
                 :key="skill"
                 class="st__tag"
-                :style="{
-                  background: steps[activeIndex].tagBg,
-                  borderColor: steps[activeIndex].tagBorder,
-                  color: steps[activeIndex].tagText,
-                }"
+                :style="{ background: step.tagBg, borderColor: step.tagBorder, color: step.tagText }"
               >{{ skill }}</span>
             </div>
-
-          </div>
-        </Transition>
-
-        <!-- Progress bar (right edge — acts like a scroll indicator) -->
-        <div class="st__bar">
-          <div
-            class="st__bar-fill"
-            :style="{
-              height: `${barFill * 100}%`,
-              background: steps[activeIndex].color,
-            }"
-          />
-          <!-- Step dots -->
-          <div class="st__bar-dots">
-            <span
-              v-for="(step, i) in steps"
-              :key="i"
-              class="st__bar-dot"
-              :class="{ 'st__bar-dot--active': i === activeIndex }"
-              :style="i <= activeIndex ? { background: steps[activeIndex].color } : {}"
-            />
           </div>
         </div>
-
       </div>
 
     </div>
@@ -171,13 +205,20 @@ const sectionRef = ref(null)
 const activeIndex = ref(0)
 const progress = ref(0) // 0–1 within the current step
 
+// Below md, the scroll-jacking tab switcher is replaced by a plain stacked list
+const isDesktop = ref(window.matchMedia('(min-width: 768px)').matches)
+
+function checkViewport() {
+  isDesktop.value = window.matchMedia('(min-width: 768px)').matches
+}
+
 // barFill = overall progress from 0 to 1 across all steps
 const barFill = computed(() => {
   return (activeIndex.value + progress.value) / steps.length
 })
 
 function onScroll() {
-  if (!sectionRef.value) return
+  if (!isDesktop.value || !sectionRef.value) return
   const rect = sectionRef.value.getBoundingClientRect()
   const scrolled = -rect.top                                       // px scrolled into the section
   const total    = steps.length * window.innerHeight               // +1 screen so last step dwells
@@ -190,8 +231,14 @@ function onScroll() {
   progress.value = (clamped % window.innerHeight) / window.innerHeight
 }
 
-onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', checkViewport)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', checkViewport)
+})
 </script>
 
 <style scoped lang="scss">
@@ -326,12 +373,18 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   }
 
   &__tool-name {
-    font-size: $font-size-base;
+    font-size: $font-size-xs;
     font-weight: 500;
     color: $color-text-black;
     text-align: center;
     line-height: 1.2;
-    word-break: break-word;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include respond-to(sm) { font-size: $font-size-sm; }
+    @include respond-to(md) { font-size: $font-size-base; white-space: normal; word-break: break-word; }
   }
 
   // ── Skill tags ───────────────────────────────────────
@@ -410,33 +463,31 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     }
   }
 
-  // ── Mobile: stacked layout (no sticky) ──────────────
+  // ── Mobile / tablet: everything stacked, no scroll-jacking ──
   @media (max-width: #{$bp-md - 1px}) {
     height: auto !important;
 
     &__inner {
       position: static;
       height: auto;
+      background: #C7AFFD;
+    }
+
+    &__mobile-list {
+      display: flex;
       flex-direction: column;
     }
 
-    &__left {
-      width: 100%;
-      border-right: none;
-      border-bottom: 1px solid $color-border;
+    &__mobile-block {
       padding: $space-10 $space-6;
-      justify-content: flex-start;
+
+      &:not(:last-child) { border-bottom: 1px solid rgba(17, 24, 39, 0.12); }
     }
 
-    &__right {
-      padding: $space-8 $space-6 $space-12;
-      align-items: flex-start;
+    &__panel {
+      margin-top: $space-6;
+      display: block;
     }
-
-    &__bar { display: none; }
-
-    // On mobile show all sections stacked
-    &__panel { display: block; }
   }
 }
 </style>

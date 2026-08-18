@@ -10,10 +10,10 @@
   width: 100%;
   max-width: $container-max;
   margin-inline: auto;
-  padding-inline: $space-4;
+  padding-inline: $space-6;
 
-  @include respond-to(md) { padding-inline: $space-8; }
-  @include respond-to(xl) { padding-inline: $space-12; }
+  @include respond-to(md) { padding-inline: $space-12; }
+  @include respond-to(xl) { padding-inline: $space-16; }
 }
 
 @mixin flex-center {

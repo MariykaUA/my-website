@@ -7,8 +7,10 @@
           <h2 class="section-title">Being inspired outside of work</h2>
         </div>
 
-        <div class="beyond__card-wrapper" ref="wrapperRef">
+        <!-- Desktop: scroll-jacked horizontal card track -->
+        <div v-if="isDesktop" class="beyond__card-wrapper" ref="wrapperRef">
           <div
+            ref="trackRef"
             class="beyond__card-track"
             :style="{ transform: `translateX(${trackOffset}px)` }"
           >
@@ -26,6 +28,20 @@
               <div v-if="item.image" class="beyond__image">
                 <img :src="item.image" :alt="item.title" />
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile / tablet: everything stacked, plain scroll -->
+        <div v-else class="beyond__mobile-list">
+          <div v-for="(item, i) in items" :key="i" class="beyond__card">
+            <div class="beyond__card-content">
+              <span v-if="item.emoji" class="beyond__icon">{{ item.emoji }}</span>
+              <h3 class="beyond__title">{{ item.title }}</h3>
+              <p class="beyond__desc">{{ item.description }}</p>
+            </div>
+            <div v-if="item.image" class="beyond__image">
+              <img :src="item.image" :alt="item.title" />
             </div>
           </div>
         </div>
@@ -67,34 +83,54 @@ const items = [
   },
 ]
 
-const GAP = 32 // 2rem in px
-
 const sectionRef = ref(null)
 const wrapperRef = ref(null)
+const trackRef = ref(null)
 const trackOffset = ref(0)
 const cardWidth = ref(0)
+const gap = ref(32) // fallback, synced with CSS gap in updateCardWidth
+
+// Below lg, the scroll-jacking horizontal track is replaced by a plain stacked list
+const isDesktop = ref(window.matchMedia('(min-width: 1024px)').matches)
+
+function checkViewport() {
+  isDesktop.value = window.matchMedia('(min-width: 1024px)').matches
+}
 
 function updateCardWidth() {
-  if (wrapperRef.value) cardWidth.value = wrapperRef.value.offsetWidth * 0.75
+  if (!isDesktop.value || !wrapperRef.value) return
+
+  const width = wrapperRef.value.offsetWidth
+  const ratio = width < 640 ? 0.85 : width < 1024 ? 0.8 : 0.75
+  cardWidth.value = width * ratio
+
+  if (trackRef.value) {
+    gap.value = parseFloat(getComputedStyle(trackRef.value).columnGap) || gap.value
+  }
 }
 
 function onScroll() {
-  if (!sectionRef.value) return
+  if (!isDesktop.value || !sectionRef.value) return
   const rect = sectionRef.value.getBoundingClientRect()
   const scrolled = -rect.top
   const clamped = Math.max(0, Math.min((items.length - 1) * window.innerHeight, scrolled))
-  trackOffset.value = -(clamped / window.innerHeight) * (cardWidth.value + GAP)
+  trackOffset.value = -(clamped / window.innerHeight) * (cardWidth.value + gap.value)
+}
+
+function handleResize() {
+  checkViewport()
+  updateCardWidth()
 }
 
 onMounted(() => {
   updateCardWidth()
   window.addEventListener('scroll', onScroll, { passive: true })
-  window.addEventListener('resize', updateCardWidth)
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', updateCardWidth)
+  window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -108,7 +144,7 @@ onUnmounted(() => {
     height: 100vh;
     display: flex;
     align-items: center;
-    padding: $space-16 0;
+    padding: $space-8 0 $space-16;
   }
 
   .container {
@@ -123,9 +159,13 @@ onUnmounted(() => {
 
   &__card-track {
     display: flex;
-    gap: 2rem;
-    padding-left: 12rem;
+    gap: $space-4;
+    padding-left: $space-4;
     will-change: transform;
+
+    @include respond-to(sm) { gap: $space-6; padding-left: $space-6; }
+    @include respond-to(md) { gap: $space-8; padding-left: $space-8; }
+    @include respond-to(lg) { padding-left: 12rem; }
   }
 
   &__card {
@@ -133,25 +173,45 @@ onUnmounted(() => {
     background: #C7AFFD;
     border-radius: $radius-xl;
     padding: 0;
-    min-height: 40vh;
+    min-height: auto;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
-    gap: $space-8;
+    flex-direction: column;
+    align-items: stretch;
+
+    @include respond-to(lg) {
+      flex-direction: row;
+      align-items: stretch;
+      gap: $space-8;
+      min-height: 40vh;
+    }
   }
 
   &__card-content {
     flex: 1;
     text-align: center;
-    padding: $space-16;
+    padding: $space-6 $space-5;
+
+    @include respond-to(sm) { padding: $space-8; }
+
+    @include respond-to(lg) {
+      padding: $space-16;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   &__image {
+    order: -1;
     flex-shrink: 0;
-    width: 45%;
-    height: 320px;
+    width: 100%;
+    height: 200px;
     border-radius: $radius-lg;
     overflow: hidden;
+
+    @include respond-to(sm) { height: 260px; }
+    @include respond-to(lg) { order: 0; width: 45%; height: auto; }
 
     img {
       width: 100%;
@@ -167,8 +227,11 @@ onUnmounted(() => {
   }
 
   &__title {
-    font-size: $font-size-4xl;
-    margin-bottom: $space-5;
+    font-size: $font-size-2xl;
+    margin-bottom: $space-3;
+
+    @include respond-to(sm) { font-size: $font-size-3xl; margin-bottom: $space-4; }
+    @include respond-to(lg) { font-size: $font-size-4xl; margin-bottom: $space-5; }
   }
 
   &__eyebrow {
@@ -185,6 +248,23 @@ onUnmounted(() => {
     color: #111827;
     line-height: 1.6;
     width: 100%;
+  }
+
+  // ── Mobile / tablet: everything stacked, no scroll-jacking ──
+  @media (max-width: #{$bp-lg - 1px}) {
+    height: auto !important;
+
+    &__sticky {
+      position: static;
+      height: auto;
+      padding: 0;
+    }
+
+    &__mobile-list {
+      display: flex;
+      flex-direction: column;
+      gap: $space-6;
+    }
   }
 }
 </style>

@@ -401,13 +401,14 @@ function closeModal() {
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-8;
-    
+    gap: $space-6;
+
+    @include respond-to(sm) { gap: $space-8; }
     @include respond-to(md) { grid-template-columns: repeat(2, 1fr); }
   }
 
   &__card {
-    background: $color-white;
+    background: $color-bg-alt;
     border: 1px solid $color-border;
     border-radius: $radius-xl;
     overflow: hidden;
@@ -429,8 +430,11 @@ function closeModal() {
 
   &__thumbnail {
     position: relative;
-    height: 300px;
+    height: 200px;
     overflow: hidden;
+
+    @include respond-to(sm) { height: 240px; }
+    @include respond-to(md) { height: 300px; }
   }
 
   &__img {
@@ -463,10 +467,12 @@ function closeModal() {
   }
 
   &__body {
-    padding: $space-6;
+    padding: $space-4;
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    @include respond-to(sm) { padding: $space-6; }
   }
 
   &__meta {
@@ -541,7 +547,8 @@ function closeModal() {
     align-items: center;
     justify-content: space-between;
     gap: $space-3;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     padding: $space-3 $space-5;
     border: 1px solid transparent;
     border-radius: $radius-xl;
@@ -594,8 +601,10 @@ function closeModal() {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: $space-6 $space-4;
+  padding: $space-4 $space-3;
   overflow-y: auto;
+
+  @include respond-to(sm) { padding: $space-6 $space-4; }
 }
 
 .modal {
@@ -628,11 +637,13 @@ function closeModal() {
   }
 
   &__header {
-    padding: $space-8 $space-8 $space-6;
+    padding: $space-6 $space-5 $space-4;
     border-bottom: 1px solid $color-border;
     display: flex;
     flex-direction: column;
     gap: $space-3;
+
+    @include respond-to(sm) { padding: $space-8 $space-8 $space-6; }
   }
 
   &__header-bottom {
@@ -665,11 +676,15 @@ function closeModal() {
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-3;
-    padding: $space-6 $space-8;
+    padding: $space-4 $space-5;
     background: $color-bg-alt;
 
+    @include respond-to(sm) { padding: $space-6 $space-8; }
+
     @supports selector(:has(*)) {
-      &:has(img:nth-child(2)) { grid-template-columns: repeat(2, 1fr); }
+      @include respond-to(sm) {
+        &:has(img:nth-child(2)) { grid-template-columns: repeat(2, 1fr); }
+      }
     }
   }
 
@@ -682,10 +697,12 @@ function closeModal() {
   }
 
   &__sections {
-    padding: $space-6 $space-8 $space-8;
+    padding: $space-4 $space-5 $space-6;
     display: flex;
     flex-direction: column;
     gap: $space-6;
+
+    @include respond-to(sm) { padding: $space-6 $space-8 $space-8; }
   }
 
   &__row {
@@ -766,12 +783,15 @@ function closeModal() {
 
   &__visual-row {
     display: flex;
+    flex-direction: column;
     gap: $space-3;
-    align-items: flex-start;
+    align-items: stretch;
 
-    .modal__visual-img {
-      flex: 1;
-      width: 0;
+    @include respond-to(sm) {
+      flex-direction: row;
+      align-items: flex-start;
+
+      .modal__visual-img { flex: 1; width: 0; }
     }
   }
 

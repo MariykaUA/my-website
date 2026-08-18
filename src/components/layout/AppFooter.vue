@@ -26,6 +26,7 @@ const year = new Date().getFullYear()
     font-size: $font-size-sm;
     color: $color-text-muted;
     margin: 0;
+    text-align: center;
   }
 }
 </style>

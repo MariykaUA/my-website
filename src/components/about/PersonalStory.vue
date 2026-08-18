@@ -52,9 +52,13 @@ useScrollAnimation()
 
 <style scoped lang="scss">
 .story {
+  padding-bottom: 0;
+
   &__header {
     text-align: center;
-    margin-bottom: $space-12;
+    margin-bottom: $space-8;
+
+    @include respond-to(lg) { margin-bottom: $space-12; }
   }
 
   &__row {
@@ -104,7 +108,14 @@ useScrollAnimation()
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: $space-10;
+    padding: $space-6;
+
+    @include respond-to(lg) { padding: $space-10; }
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      text-align: center;
+      align-items: center;
+    }
   }
 
   &__eyebrow {
@@ -117,31 +128,42 @@ useScrollAnimation()
   }
 
   &__title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: 1.75rem;
+    line-height: 1.2;
     margin-bottom: 0;
+
+    @include respond-to(sm) { font-size: 2.25rem; }
+    @include respond-to(lg) { font-size: clamp(2rem, 4vw, 3rem); }
   }
 
   &__quote {
     text-align: center;
     max-width: 760px;
-    margin: $space-12 auto 0;
-    font-size: $font-size-xl;
+    margin: $space-8 auto;
+    font-size: $font-size-lg;
     font-style: italic;
     color: $color-primary;
     font-weight: 500;
     line-height: 1.6;
+
+    @include respond-to(sm) { font-size: $font-size-xl; }
+    @include respond-to(lg) { margin-block: $space-12; }
   }
 
   &__para {
     margin-bottom: $space-5;
     line-height: 1.7;
+
+    @include respond-to(md) { font-size: $font-size-lg; }
   }
 
   &__actions {
     display: flex;
     flex-wrap: wrap;
     gap: $space-4;
-    margin-top: $space-8;
+    margin-top: $space-5;
+
+    @media (max-width: #{$bp-lg - 1px}) { justify-content: center; }
   }
 }
 </style>

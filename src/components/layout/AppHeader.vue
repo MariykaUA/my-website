@@ -6,7 +6,25 @@
         <span class="header__logo-text">ariia</span>
       </RouterLink>
 
-      <nav class="header__nav" :class="{ 'header__nav--open': menuOpen }">
+      <nav class="header__nav">
+        <RouterLink
+          v-for="link in navLinks"
+          :key="link.to"
+          :to="link.to"
+          class="header__link"
+        >
+          {{ link.label }}
+        </RouterLink>
+      </nav>
+
+      <button class="header__burger" :aria-expanded="menuOpen" aria-label="Toggle menu" @click="menuOpen = !menuOpen">
+        <span /><span /><span />
+      </button>
+    </div>
+
+    <!-- Teleported to body so the fixed overlay isn't clipped by the header's backdrop-filter -->
+    <Teleport to="body">
+      <nav v-if="menuOpen" class="header__nav header__nav--open">
         <RouterLink
           v-for="link in navLinks"
           :key="link.to"
@@ -17,11 +35,7 @@
           {{ link.label }}
         </RouterLink>
       </nav>
-
-      <button class="header__burger" :aria-expanded="menuOpen" aria-label="Toggle menu" @click="menuOpen = !menuOpen">
-        <span /><span /><span />
-      </button>
-    </div>
+    </Teleport>
   </header>
 </template>
 
@@ -63,7 +77,7 @@ const navLinks: NavLink[] = [
   &__inner {
     @include flex-between;
     height: 100%;
-    padding: 18px;
+    padding-block: 18px;
   }
 
   &__logo {
@@ -141,8 +155,11 @@ const navLinks: NavLink[] = [
     display: flex;
     flex-direction: column;
     position: fixed;
-    inset: $header-height 0 0;
-    background: $color-bg;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    height: auto;
+    background: $color-primary;
     padding: $space-8;
     gap: $space-6;
     align-items: center;
@@ -151,6 +168,14 @@ const navLinks: NavLink[] = [
 
     .header__link {
       font-size: $font-size-xl;
+      color: $color-white;
+
+      &::after { background: $color-white; }
+
+      &:hover,
+      &.router-link-active {
+        color: $color-white;
+      }
     }
   }
 }

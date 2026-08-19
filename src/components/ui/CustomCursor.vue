@@ -88,4 +88,10 @@ onUnmounted(() => {
       0 0 60px 28px rgba($color-primary, 0.2);
   }
 }
+
+@media (max-width: #{$bp-lg - 1px}) {
+  .cursor {
+   display: none
+  }
+}
 </style>

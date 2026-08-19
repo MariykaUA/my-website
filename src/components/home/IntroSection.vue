@@ -29,9 +29,9 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation'
 useScrollAnimation()
 
 const stats = [
-  { value: '1', label: 'Year of experience' },
-  { value: '5+', label: 'Projects completed' },
-  { value: '14', label: 'Countries visited' },
+  { value: '1+', label: 'Year of experience' },
+  { value: '7+', label: 'Projects completed' },
+  { value: '19', label: 'Countries visited' },
   { value: '5', label: 'Languages spoken' }
 ]
 </script>
